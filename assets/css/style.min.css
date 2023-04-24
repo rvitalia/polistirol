@@ -4775,13 +4775,24 @@ footer {
 .testing__inner__documents__item {
   border-radius: 2rem;
   width: 360px;
-  height: 573px;
+  /* height: 573px; */
+  height: auto;
   border: 1px solid #76CD71;
+  overflow: hidden;
 }
 @media (max-width: 1440px) {
   .testing__inner__documents__item {
     width: auto;
   }
+}
+
+.pdfemb-viewer{
+  border: none !important;
+  margin: 0 auto !important;
+}
+
+.mejs-inner>.mejs-controls{
+  display: none;
 }
 
 .testing__inner__tests {
@@ -4811,6 +4822,9 @@ footer {
 
 .swiper__testing {
   padding-top: 6rem;
+}
+.testing__inner__tests__item__container{
+  overflow: hidden;
 }
 
 .testing__inner__tests__item__container__video {
@@ -4850,6 +4864,8 @@ footer {
   left: 0;
   z-index: 1;
   pointer-events: none;
+  transition: all 0.3s linear;
+  transform: translateY(0);
 }
 .testing__inner__tests__item__container__present > h6 {
   font-family: "Inter";
@@ -4859,8 +4875,10 @@ footer {
   line-height: 31px;
   color: #FFFFFF;
   margin-right: auto;
+  margin-top: 15rem;
   margin-left: 2rem;
   padding-top: 2rem;
+
 }
 @media (max-width: 576px) {
   .testing__inner__tests__item__container__present {
@@ -5105,6 +5123,8 @@ footer {
   border-radius: 20px;
   background-color: grey;
   object-fit: cover;
+  border: 1px solid #76CD71;
+  overflow: hidden;
 }
 .about__inner__wrapper__item__image::after, .about__inner__wrapper__item__image::before {
   position: absolute;
