@@ -123,7 +123,7 @@ Template Post Type: post, page, product
                                 <svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
                                     <use xlink:href="#favorites"></use>
                                 </svg>
-                                <a href="./products.html"><img class="swiper__slide__inner__image" src="./assets/images/catalog/Catalog.png" alt="block"></a>
+                                <a href="./products.html"><img class="swiper__slide__inner__image" src="<?php bloginfo('template_url'); ?>/assets/images/catalog/Catalog.png" alt="block"></a>
                                 <a href="./products.html">
                                     <h5 class="swiper__slide__inner__title">Блок стандартный</h5>
                                 </a>
@@ -145,7 +145,7 @@ Template Post Type: post, page, product
                                 <svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
                                     <use xlink:href="#favorites"></use>
                                 </svg>
-                                <a href="./products.html"><img class="swiper__slide__inner__image" src="./assets/images/catalog/Catalog.png" alt="block"></a>
+                                <a href="./products.html"><img class="swiper__slide__inner__image" src="<?php bloginfo('template_url'); ?>/assets/images/catalog/Catalog.png" alt="block"></a>
                                 <a href="./products.html">
                                     <h5 class="swiper__slide__inner__title">Блок стандартный</h5>
                                 </a>
@@ -167,7 +167,7 @@ Template Post Type: post, page, product
                                 <svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
                                     <use xlink:href="#favorites"></use>
                                 </svg>
-                                <a href="./products.html"><img class="swiper__slide__inner__image" src="./assets/images/catalog/Catalog.png" alt="block"></a>
+                                <a href="./products.html"><img class="swiper__slide__inner__image" src="<?php bloginfo('template_url'); ?>/assets/images/catalog/Catalog.png" alt="block"></a>
                                 <a href="./products.html">
                                     <h5 class="swiper__slide__inner__title">Блок стандартный</h5>
                                 </a>
@@ -189,7 +189,7 @@ Template Post Type: post, page, product
                                 <svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
                                     <use xlink:href="#favorites"></use>
                                 </svg>
-                                <a href="./products.html"><img class="swiper__slide__inner__image" src="./assets/images/catalog/Catalog.png" alt="block"></a>
+                                <a href="./products.html"><img class="swiper__slide__inner__image" src="<?php bloginfo('template_url'); ?>/assets/images/catalog/Catalog.png" alt="block"></a>
                                 <a href="./products.html">
                                     <h5 class="swiper__slide__inner__title">Блок стандартный</h5>
                                 </a>
@@ -211,7 +211,7 @@ Template Post Type: post, page, product
                                 <svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
                                     <use xlink:href="#favorites"></use>
                                 </svg>
-                                <a href="./products.html"><img class="swiper__slide__inner__image" src="./assets/images/catalog/Catalog.png" alt="block"></a>
+                                <a href="./products.html"><img class="swiper__slide__inner__image" src="<?php bloginfo('template_url'); ?>/assets/images/catalog/Catalog.png" alt="block"></a>
                                 <a href="./products.html">
                                     <h5 class="swiper__slide__inner__title">Блок стандартный</h5>
                                 </a>
@@ -388,20 +388,11 @@ Template Post Type: post, page, product
                 <div class="callback__inner__wrapper">
                     <div class="callback__inner__parttop">
                         <div class="callback__inner__wrapper__img">
-                            <img src="./assets/images/callback/imagr-left.png" alt="" class="callback__inner__wrapper__img__left">
+                            <img src="<?php the_field('imageleft_calback', 7)?>" alt="polisterol" class="callback__inner__wrapper__img__left">
                         </div>
-                        <div class="callback__inner__wrapper__form">
-                            <div class="callback__inner__wrapper__form__inner">
-                                <input type="text" placeholder="Ваше имя" class="callback__inner__wrapper__form__input">
-                                <input type="text" placeholder="Компания" class="callback__inner__wrapper__form__input">
-                                <input type="tel" placeholder="Телефон" class="callback__inner__wrapper__form__input">
-                                <input type="email" placeholder="Еmail" class="callback__inner__wrapper__form__input">
-                            </div>
-                            <span class="callback__inner__wrapper__form__agreement">Оставляя заявку вы соглашаетесь с
-                                <a href="" target="_blank">политикой
-                                    конфиденциальности</a></span>
-                            <button class="callback__inner__wrapper__form__button">Отправить заявку</button>
-                        </div>
+
+                        <?php  echo do_shortcode('[contact-form-7 id="151" title="Связаться с нами"]') ?>
+            
                     </div>
                     <h2 class="callback__inner__wrapper__title">Общество с ограниченной ответственностью «Газовая служба 60»
                     </h2>
@@ -409,39 +400,40 @@ Template Post Type: post, page, product
                         <div class="callback__inner__wrapper__bottom__left">
                             <dl class="callback__inner__wrapper__datalist">
                                 <dt>Юридический адрес</dt>
-                                <dd>180007, город Псков, ул. Петровская, д. 4, помещение № 4/2</dd>
+                                <dd> <?php the_field('Ur_adress', 7)?> </dd>
                             </dl>
                             <dl class="callback__inner__wrapper__datalist">
                                 <dt>Телефон</dt>
-                                <dd>+ 7 (960)-222-44-04 + 7 (953)-230-81-86</dd>
+                                <dd><a href="tel:<?php the_field('tel_callback1', 7)?>"><?php the_field('tel_site', 7)?></a> <a href="tel:<?php the_field('tel_callback2', 7)?>"><?php the_field('tel_site2', 7)?></a></dd>
                             </dl>
-                            <a href="" class="calback__inner__wrapper__datalist__profile"><b>Профиль организации на
+                            <a href="<?php the_field('href_rusprofail', 7)?>', 7)?>" class="calback__inner__wrapper__datalist__profile"><b>Профиль организации на
                                     сайте </b>Руспрофайл</a>
                         </div>
                         <div class="callback__inner__wrapper__bottom__right">
                             <dl class="callback__inner__wrapper__datalist">
                                 <dt>ИНН/КПП</dt>
-                                <dd>6027204690/602701001</dd>
+                                <dd><?php the_field('INN/KPP', 7)?></dd>
                             </dl>
                             <dl class="callback__inner__wrapper__datalist">
                                 <dt>ОГРН</dt>
-                                <dd>12160000017552</dd>
+                                <dd><?php the_field('OGRN', 7)?></dd>
                             </dl>
                         </div>
                         <ul class="calback__inner__part__bottom__info">
                             <li class=" calback__inner__part__bottom__info__title">Юридический адрес</li>
-                            <li class="calback__inner__part__bottom__info__text">180007, город Псков, ул. Петровская, д. 4,
-                                помещение № 4/2</li>
+                            <li class="calback__inner__part__bottom__info__text"><?php the_field('Ur_adress', 7)?></li>
                             <li class="calback__inner__part__bottom__info__title">Телефон</li>
-                            <li class="calback__inner__part__bottom__info__text">+ 7 (960)-222-44-04 + 7 (953)-230-81-86
+                            <li class="calback__inner__part__bottom__info__text"><a href="tel:<?php the_field('imageleft_calback1', 7)?>"><?php the_field('tel_site', 7)?></a> 
+                            <a href="tel:<?php the_field('tel_callback2', 7)?>"><?php the_field('tel_callback2', 7)?></a>
+                            + 7 (953)-230-81-86
                             </li>
                             <li class="calback__inner__part__bottom__info__title">ИНН/КПП</li>
-                            <li class="calback__inner__part__bottom__info__text">6027204690/602701001</li>
+                            <li class="calback__inner__part__bottom__info__text"><?php the_field('INN/KPP', 7)?></li>
                             <li class="calback__inner__part__bottom__info__title">ОГРН</li>
-                            <li class="calback__inner__part__bottom__info__text">12160000017552</li>
+                            <li class="calback__inner__part__bottom__info__text"><?php the_field('OGRNtel:', 7)?>12160000017552</li>
                         </ul>
                     </div>
-                    <a class="calback__inner__wrapper__datalist__profile calback__inner__wrapper__datalist__profile__mobile" href=""><b>Профиль организации на
+                    <a class="calback__inner__wrapper__datalist__profile calback__inner__wrapper__datalist__profile__mobile" href="<?php the_field('href_rusprofail', 7)?>"><b>Профиль организации на
                             сайте </b>Руспрофайл</a>
 
                 </div>
@@ -459,19 +451,19 @@ Template Post Type: post, page, product
                 </div>
                 <h1 class="modallcall__inner__title">Выберите удобный способ связи для вас </h1>
                 <div class="modallcall__inner__wrapper">
-                    <a href="tel:" class="modallcall__inner__wrapper__button" target="_blank">Сделать звонок</a>
+                    <a href="tel:<?php the_field('modal_cal_tel', 7)?>" class="modallcall__inner__wrapper__button" target="_blank">Сделать звонок</a>
                     <button class="modallcall__inner__wrapper__button" id="makeorder">Оставить заявку</button>
                 </div>
                 <div class="modallcall__inner__connection">
                     <h6 class="modallcall__inner__conection__title">Связаться через</h6>
                     <div class="modallcall__inner__connection__container">
-                        <a href="tg://" target="_blank" class="modallcall__inner__connection__container__item__link">
+                        <a href="tg://<?php the_field('modal_cal_telegram', 7)?>" target="_blank" class="modallcall__inner__connection__container__item__link">
                             <svg>
                                 <use xlink:href="#telegram"></use>
                             </svg>
                             <b>Telegram</b>
                         </a>
-                        <a href="https://wa.me/[номер]" target="_blank" class="modallcall__inner__connection__container__item__link">
+                        <a href="https://wa.me/<?php the_field('modal_cal_whatsapp', 7)?>" target="_blank" class="modallcall__inner__connection__container__item__link">
                             <svg class="green">
                                 <use xlink:href="#whatsapp"></use>
                             </svg>
@@ -493,17 +485,9 @@ Template Post Type: post, page, product
                     </svg>
                 </div>
                 <h3 class="modal__inner__title">Оставьте заявку и мы свяжемся с вами в ближайшее время</h3>
-                <form action="" class="modal__inner__form">
-                    <input type="text" class="modal__inner__form__input" placeholder="Ваше имя">
-                    <input type="number" class="modal__inner__form__input" placeholder="Телефон">
 
-                    <h5 class="modal__inner__form__calltime">Напишите дату и время когда вам перезвонить</h5>
-                    <div class="modal__inner__form__wrapper">
-                        <input type="text" class="modal__inner__form__input date" placeholder="01.01.2023">
-                        <input type="text" class="modal__inner__form__input date" placeholder="12:00">
-                    </div>
-                    <button type="submit" class="modal__inner__form__button">Оставить заявку</button>
-                </form>
+                <?php  echo do_shortcode('[contact-form-7 id="168" title="Оставить заявку" html_class="modal__inner__form"]') ?>
+                
                 <div class="modal__inner__text">Оставляя заявку вы соглашаетесь с
                     <a href="" class="modal__inner__text__politics" target="_blank">политикой конфиденциальности</a>
                 </div>

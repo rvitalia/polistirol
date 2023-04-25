@@ -4569,7 +4569,9 @@ footer {
   width: 5.5rem;
   height: 8.4rem;
   margin-left: 3rem;
-}
+  /* background-position: center;
+  background-size: contain; */
+  background-repeat: no-repeat;}
 
 @media (max-width: 576px) {
   .footer__inner__top__columns:nth-child(1) {
@@ -5256,7 +5258,7 @@ footer {
 .callback__inner__wrapper__form__input {
   border: 1px solid #000000;
   border-radius: 20px;
-  max-width: 60.5rem;
+  max-width: 60.4rem;
   width: calc((1vh + 1vw) * 27);
   height: 56px;
   font-family: "OpenSans";
@@ -5358,6 +5360,10 @@ footer {
   font-size: 20px;
   line-height: 24px;
   letter-spacing: -0.045em;
+}
+
+.wpcf7-spinner{
+  display: none;
 }
 .callback__inner__wrapper__form__button:hover {
   background-color: white;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html <?php language_attributes(); ?>>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="<?php bloginfo('charset'); ?>">
 
     <!-- <link rel="stylesheet" href="assets/css/style.min.css"> -->
     
@@ -12,8 +12,10 @@
     <meta name="google" content="notranslate">
     <meta name="format-detection" content="telephone=no">
     <meta name="description" content="">
+
+    <link rel="shortcut icon" href="<?php bloginfo('template_url'); ?>/assets/images/favicon.ico" type="image/x-icon">
     
-    <title>Polistirol</title>
+    <title>Полистирол</title>
 
     <?php wp_head(); ?>
 
@@ -59,19 +61,19 @@
     <header class="header">
         <div class="container container-main">
             <div class="header__inner">
-                <a class="header__inner__logo__link" href="./index.html">
-                    <div class="header__inner__logo" style="background-image: url(./assets/images/header/Logo.png);"></div>
-                    <div class="header__inner__logomobile" style="background-image: url(./assets/images/header/logomobile.png);"></div>
+                <a class="header__inner__logo__link" href="<?php echo get_page_link(7); ?>">
+                    <div class="header__inner__logo" style="background-image: url(<?php the_field('logo_site',  'option') ?>);"></div>
+                    <div class="header__inner__logomobile" style="background-image: url(<?php the_field('logo_site_mobile',  'option') ?>);"></div>
                 </a>
     
-                <div class="header__inner__burger" id="burger" style="background-image: url(./assets/images/svg/burger.svg);"></div>
+                <div class="header__inner__burger" id="burger" style="background-image: url(<?php the_field('burger',  'option') ?>);"></div>
     
                 <nav class="header__inner__nav">
-                    <a href="./index.html" class="header__inner__nav__item">Главная</a>
-                    <a href="./index.html#about__us" class="header__inner__nav__item">О нас</a>
-                    <a href="./index.html#catalog" class="header__inner__nav__item">Каталог</a>
-                    <a href="./index.html#adventages" class="header__inner__nav__item">Характеристики</a>
-                    <a href="./index.html#testing" class="header__inner__nav__item">Документы</a>
+                    <a href="<?php bloginfo('url'); ?>" class="header__inner__nav__item">Главная</a>
+                    <a href="<?php bloginfo('url'); ?>#about__us" class="header__inner__nav__item">О нас</a>
+                    <a href="<?php bloginfo('url'); ?>#catalog" class="header__inner__nav__item">Каталог</a>
+                    <a href="<?php bloginfo('url'); ?>#adventages" class="header__inner__nav__item">Характеристики</a>
+                    <a href="<?php bloginfo('url'); ?>#testing" class="header__inner__nav__item">Документы</a>
                 </nav>
                 <div class="header__inner__widgets" id="widgets">
                     <div class="header__inner__widgets__item">
@@ -102,11 +104,11 @@
                         </svg>
                     </div>
                     <nav class="header__inner__nav__burger">
-                        <a href="./index.html" class="header__inner__nav__burger__item" data-select>Главная</a>
-                        <a href="#about__us" class="header__inner__nav__burger__item" data-select>О нас</a>
-                        <a href="#catalog" class="header__inner__nav__burger__item" data-select>Каталог</a>
-                        <a href="#adventages" class="header__inner__nav__burger__item" data-select>Характеристики</a>
-                        <a href="#testing" class="header__inner__nav__burger__item" data-select>Лицензии</a>
+                        <a href="<?php bloginfo('url'); ?>" class="header__inner__nav__burger__item" data-select>Главная</a>
+                        <a href="<?php bloginfo('url'); ?>#about__us" class="header__inner__nav__burger__item" data-select>О нас</a>
+                        <a href="<?php bloginfo('url'); ?>#catalog" class="header__inner__nav__burger__item" data-select>Каталог</a>
+                        <a href="<?php bloginfo('url'); ?>#adventages" class="header__inner__nav__burger__item" data-select>Характеристики</a>
+                        <a href="<?php bloginfo('url'); ?>#testing" class="header__inner__nav__burger__item" data-select>Лицензии</a>
                     </nav>
         
                     <div class="header__inner__nav__burger__widgets">
