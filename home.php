@@ -112,138 +112,19 @@ Template Post Type: post, page, product
         <div class="container container-main">
             <div class="catalog__inner">
                 <h1 class="catalog__inner__title">Каталог</h1>
-                <!-- Slider main container -->
-                <div class="swiper swiper__catalog">
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
+                 
+            <?php  if (have_posts() ) :  ?>    
 
-                        <div class="swiper-slide swiper-slide-catalog">
-                            <div class="swiper__slide__inner">
-                                <svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
-                                    <use xlink:href="#favorites"></use>
-                                </svg>
-                                <a href="./products.html"><img class="swiper__slide__inner__image" src="<?php bloginfo('template_url'); ?>/assets/images/catalog/Catalog.png" alt="block"></a>
-                                <a href="./products.html">
-                                    <h5 class="swiper__slide__inner__title">Блок стандартный</h5>
-                                </a>
-                                <span class="swiper__slide__inner__price">9 900р.</span>
-                                <span class="swiper__slide__inner__info">ГОСТ 33929-2016</span>
+                 <?php  while(have_posts() ) :  the_post();  ?>
 
+                       <h2><?php  the_title();   ?></h2>
+                       <?php  the_content();   ?>
 
-                                <div class="swiper__slide__inner__list"><b>Назначение:</b> специализируется на производстве
-                                    и продаже</div>
-                                <div class="swiper__slide__inner__list"><b>Размер:</b> 125х55х102</div>
-                                <div class="swiper__slide__inner__list swiper__slide__inner__list-last"><b>Плотность:</b>
-                                    D500</div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p>Ничего не найдено</p>    
+            <?php  endif;  ?>
 
-                                <button class="swiper__slide__inner__addbasket" type="button">Добавить в корзину</button>
-                            </div>
-                        </div>
-                        <div class="swiper-slide swiper-slide-catalog">
-                            <div class="swiper__slide__inner">
-                                <svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
-                                    <use xlink:href="#favorites"></use>
-                                </svg>
-                                <a href="./products.html"><img class="swiper__slide__inner__image" src="<?php bloginfo('template_url'); ?>/assets/images/catalog/Catalog.png" alt="block"></a>
-                                <a href="./products.html">
-                                    <h5 class="swiper__slide__inner__title">Блок стандартный</h5>
-                                </a>
-                                <span class="swiper__slide__inner__price">9 900р.</span>
-                                <span class="swiper__slide__inner__info">ГОСТ 33929-2016</span>
-
-
-                                <div class="swiper__slide__inner__list"><b>Назначение:</b> специализируется на производстве
-                                    и продаже</div>
-                                <div class="swiper__slide__inner__list"><b>Размер:</b> 125х55х102</div>
-                                <div class="swiper__slide__inner__list swiper__slide__inner__list-last"><b>Плотность:</b>
-                                    D500</div>
-
-                                <button class="swiper__slide__inner__addbasket" type="button">Добавить в корзину</button>
-                            </div>
-                        </div>
-                        <div class="swiper-slide swiper-slide-catalog">
-                            <div class="swiper__slide__inner">
-                                <svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
-                                    <use xlink:href="#favorites"></use>
-                                </svg>
-                                <a href="./products.html"><img class="swiper__slide__inner__image" src="<?php bloginfo('template_url'); ?>/assets/images/catalog/Catalog.png" alt="block"></a>
-                                <a href="./products.html">
-                                    <h5 class="swiper__slide__inner__title">Блок стандартный</h5>
-                                </a>
-                                <span class="swiper__slide__inner__price">9 900р.</span>
-                                <span class="swiper__slide__inner__info">ГОСТ 33929-2016</span>
-
-
-                                <div class="swiper__slide__inner__list"><b>Назначение:</b> специализируется на производстве
-                                    и продаже</div>
-                                <div class="swiper__slide__inner__list"><b>Размер:</b> 125х55х102</div>
-                                <div class="swiper__slide__inner__list swiper__slide__inner__list-last"><b>Плотность:</b>
-                                    D500</div>
-
-                                <button class="swiper__slide__inner__addbasket" type="button">Добавить в корзину</button>
-                            </div>
-                        </div>
-                        <div class="swiper-slide swiper-slide-catalog">
-                            <div class="swiper__slide__inner">
-                                <svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
-                                    <use xlink:href="#favorites"></use>
-                                </svg>
-                                <a href="./products.html"><img class="swiper__slide__inner__image" src="<?php bloginfo('template_url'); ?>/assets/images/catalog/Catalog.png" alt="block"></a>
-                                <a href="./products.html">
-                                    <h5 class="swiper__slide__inner__title">Блок стандартный</h5>
-                                </a>
-                                <span class="swiper__slide__inner__price">9 900р.</span>
-                                <span class="swiper__slide__inner__info">ГОСТ 33929-2016</span>
-
-
-                                <div class="swiper__slide__inner__list"><b>Назначение:</b> специализируется на производстве
-                                    и продаже</div>
-                                <div class="swiper__slide__inner__list"><b>Размер:</b> 125х55х102</div>
-                                <div class="swiper__slide__inner__list swiper__slide__inner__list-last"><b>Плотность:</b>
-                                    D500</div>
-
-                                <button class="swiper__slide__inner__addbasket" type="button">Добавить в корзину</button>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="swiper__slide__inner">
-                                <svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
-                                    <use xlink:href="#favorites"></use>
-                                </svg>
-                                <a href="./products.html"><img class="swiper__slide__inner__image" src="<?php bloginfo('template_url'); ?>/assets/images/catalog/Catalog.png" alt="block"></a>
-                                <a href="./products.html">
-                                    <h5 class="swiper__slide__inner__title">Блок стандартный</h5>
-                                </a>
-                                <span class="swiper__slide__inner__price">9 900р.</span>
-                                <span class="swiper__slide__inner__info">ГОСТ 33929-2016</span>
-
-
-                                <div class="swiper__slide__inner__list"><b>Назначение:</b> специализируется на производстве
-                                    и продаже</div>
-                                <div class="swiper__slide__inner__list"><b>Размер:</b> 125х55х102</div>
-                                <div class="swiper__slide__inner__list swiper__slide__inner__list-last"><b>Плотность:</b>
-                                    D500</div>
-
-                                <button class="swiper__slide__inner__addbasket" type="button">Добавить в корзину</button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev swiper-catalog-prev">
-                        <svg>
-                            <use xlink:href="#prev"></use>
-                        </svg>
-                    </div>
-                    <div class="swiper-button-next swiper-catalog-next">
-                        <svg>
-                            <use xlink:href="#next"></use>
-                        </svg>
-                    </div>
-
-                </div>
             </div>
         </div>
     </section>
