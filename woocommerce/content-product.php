@@ -32,7 +32,7 @@ if (empty($product) || !$product->is_visible()) {
 		<svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
 			<use xlink:href="#favorites"></use>
 		</svg>
-		<a href="<?php echo $product->get_permalink(); ?>"><img class="swiper__slide__inner__image" src="<?php echo $product->get_image(); ?>" alt="block"></a>
+		<a href="<?php echo $product->get_permalink(); ?>"><div class="swiper__slide__inner__image"><?php echo $product->get_image(); ?></div></a>
 		<a href="<?php echo $product->get_permalink(); ?>">
 			<h5 class="swiper__slide__inner__title"> <?php echo $product->get_title(); ?></h5>
 		</a>
@@ -49,3 +49,6 @@ if (empty($product) || !$product->is_visible()) {
 		<a href="<?php echo $product->add_to_cart_url() ?>" class="swiper__slide__inner__addbasket" type="button"><?php echo $product->add_to_cart_text() ?></a>
 	</div>
 </div>
+
+
+<!-- <img class="swiper__slide__inner__image" src="" alt="block"> -->

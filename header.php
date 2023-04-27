@@ -83,6 +83,7 @@
                         </svg>
                     </div>
                     
+                    <!-- <?php wp_nav_menu(); ?> -->
                     <a href="./favourites.html" class="header__inner__widgets__icon">
                         <svg class="header__inner__widgets__favorites">
                             <use xlink:href="#favorites"></use>

@@ -1,11 +1,5 @@
 <?php
 
-function mytheme_add_woocommerce_support() {
-    add_theme_support( 'woocommerce' );
-}
-
-add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
-
 if( function_exists('acf_add_options_page') ) {
     
 	acf_add_options_page();
@@ -94,6 +88,13 @@ wp_deregister_style('woocommerce-general');
 wp_deregister_style('woocommerce-layout');
 
 add_action('init', 'register_post_types');
+
+// add_action( 'after_setup_theme', 'theme_register_nav_menu' );
+
+// function theme_register_nav_menu() {
+// 	register_nav_menu( 'Top', 'Меню в шапке справа' );
+// }
+
 
 function register_post_types()
 {
@@ -220,6 +221,8 @@ function register_post_types()
 add_theme_support('post-thumbnails');
 add_theme_support('title-tag');
 add_theme_support('custom-logo'); 
+add_theme_support('woocommerce'); 
+
 add_filter('wpcf7_autop_or_not', '__return_false');
 
 add_filter('wpcf7_form_elements', function($content) {
@@ -249,3 +252,4 @@ add_filter('wpcf7_form_elements', function($content) {
 // 		wp_enqueue_script( 'news', get_template_directory_uri() .'/assets/js/news.js', array(), null, true );
 // 	}
 // }
+
