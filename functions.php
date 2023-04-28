@@ -231,6 +231,24 @@ add_filter('wpcf7_form_elements', function($content) {
     return $content;
 });
 
+
+// function filter_woocommerce_product_single_add_to_cart_text( $text, $instance ) {
+//     // Измените значение текста $text на кнопке
+//     return $text;
+// };
+// add_filter( 'woocommerce_product_single_add_to_cart_text', 'filter_woocommerce_product_single_add_to_cart_text', 10, 2 );
+
+add_filter( 'woocommerce_product_single_add_to_cart_text', 'woocommerce_add_to_cart_button_text_single' ); 
+function woocommerce_add_to_cart_button_text_single() {
+    return __( 'Добавить в корзину', 'woocommerce' ); 
+}
+
+// Change add to cart text on product archives page
+add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_add_to_cart_button_text_archives' );  
+function woocommerce_add_to_cart_button_text_archives() {
+    return __( 'Добавить в корзину', 'woocommerce' );
+}
+
 // function abrosco__scripts() {
 // 	if ( is_page(7) ) {
 // 		// отменяем зарегистрированный jQuery

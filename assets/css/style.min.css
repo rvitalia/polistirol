@@ -2798,26 +2798,39 @@ html, body {
   padding-left: 2.1rem;
 }
 
-.swiper__slide__inner__list {
-  display: block;
+.swiper__slide__inner__list, .woocommerce-product-attributes-item__value, .woocommerce-product-attributes-item__label {
+  /* display: block; */
   font-family: "OpenSans";
   font-style: normal;
   font-size: 16px;
   line-height: 26px;
   /* or 162% */
-  padding-left: 2.1rem;
-  letter-spacing: -0.04em;
+  /* padding-left: 2.1rem; */
+  letter-spacing: -0.09em;
   color: rgba(0, 0, 0, 0.7);
   max-width: 257px;
   text-align: left;
   font-weight: 600;
-  margin: 4.9px 0 5px;
+  padding: 0.49rem 0 0.5rem 0.5rem;
 }
+.shop_attributes{
+  position: relative;
+  z-index: -1;
+  margin-left: 2.1rem;
+}
+@media (max-width: 992px) {
+  .shop_attributes {
+    margin-left: 0;
+  }
+}
+
+
 .swiper__slide__inner__list-last {
   margin-bottom: 7.5rem;
 }
 
-.swiper__slide__inner__list > b {
+.swiper__slide__inner__list > b, .woocommerce-product-attributes-item__label {
+  padding: 0.49rem 0 0.5rem ;
   font-weight: 700;
 }
 
