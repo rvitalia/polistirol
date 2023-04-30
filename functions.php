@@ -80,7 +80,15 @@ function fix_svg_mime_type( $data, $file, $filename, $mimes, $real_mime = '' ){
 add_action('wp_enqueue_scripts', function () {
 	wp_enqueue_style('style-name', get_template_directory_uri() . '/assets/css/style.min.css');
 
-	wp_enqueue_script('script-name', get_template_directory_uri() . '/assets/js/app.js', array(), '1.0.0', true);
+
+	if (is_shop()) : 
+        wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.min.js', array(), '1.0.0', true);
+		 endif ;
+
+	if (is_product()) :
+        wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/main.min.js', array(), '1.0.0', true);
+	endif ;
+	
 });
 
 
@@ -88,6 +96,31 @@ wp_deregister_style('woocommerce-general');
 wp_deregister_style('woocommerce-layout');
 
 add_action('init', 'register_post_types');
+
+
+// function abrosco__scripts() {
+// 	if ( is_page(7) ) {
+// 		// отменяем зарегистрированный jQuery
+// 		wp_deregister_script( 'jquery' );
+// 		wp_register_script( 'jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js');
+
+// 		wp_enqueue_script( 'jquery');
+// 		wp_enqueue_script( 'scroll-magic', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js', null, true );
+// 		// wp_enqueue_script( 'particleJS', 'http://www.jsdelivr.com/#!particles.js', null, true );
+// 		wp_enqueue_script( 'app', get_template_directory_uri() .'/assets/js/app.js', array('jquery'), null, true );
+// 	}
+// 	if ( is_page(196) ) {
+// 		wp_enqueue_script( 'main', get_template_directory_uri() .'/assets/js/main.js', array(), null, true );
+// 	}
+// 		if ( is_page(355) ) {
+// 		wp_enqueue_script( 'project', get_template_directory_uri() .'/assets/js/project.js', array(), null, true );
+// 	}
+// 		if ( is_page(721) ) {
+// 		wp_enqueue_script( 'news', get_template_directory_uri() .'/assets/js/news.js', array(), null, true );
+// 	}
+// }
+
+
 
 // add_action( 'after_setup_theme', 'theme_register_nav_menu' );
 
@@ -249,25 +282,5 @@ function woocommerce_add_to_cart_button_text_archives() {
     return __( 'Добавить в корзину', 'woocommerce' );
 }
 
-// function abrosco__scripts() {
-// 	if ( is_page(7) ) {
-// 		// отменяем зарегистрированный jQuery
-// 		wp_deregister_script( 'jquery' );
-// 		wp_register_script( 'jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js');
-
-// 		wp_enqueue_script( 'jquery');
-// 		wp_enqueue_script( 'scroll-magic', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js', null, true );
-// 		// wp_enqueue_script( 'particleJS', 'http://www.jsdelivr.com/#!particles.js', null, true );
-// 		wp_enqueue_script( 'app', get_template_directory_uri() .'/assets/js/app.js', array('jquery'), null, true );
-// 	}
-// 	if ( is_page(196) ) {
-// 		wp_enqueue_script( 'main', get_template_directory_uri() .'/assets/js/main.js', array(), null, true );
-// 	}
-// 		if ( is_page(355) ) {
-// 		wp_enqueue_script( 'project', get_template_directory_uri() .'/assets/js/project.js', array(), null, true );
-// 	}
-// 		if ( is_page(721) ) {
-// 		wp_enqueue_script( 'news', get_template_directory_uri() .'/assets/js/news.js', array(), null, true );
-// 	}
-// }
-
+remove_action( 'woocommerce_before_main_content','woocommerce_breadcrumb', 20);
+remove_action( 'woocommerce_sidebar','woocommerce_get_sidebar', 10);

@@ -39,19 +39,11 @@ if (empty($product) || !$product->is_visible()) {
 			<h5 class="swiper__slide__inner__title"> <?php echo $product->get_title(); ?></h5>
 		</a>
 		<span class="swiper__slide__inner__price"><?php echo $product->get_price_html(); ?></span>
-
-		<?php if ($product->get_attributes()) {
+		
+		<?php 
+		if ($product->get_attributes()) {
 			wc_display_product_attributes($product);
 		} ?>
-
-		<!-- <span class="swiper__slide__inner__info">ГОСТ 33929-2016</span>
-
-
-		<div class="swiper__slide__inner__list"><b>Назначение:</b> специализируется на производстве
-			и продаже</div>
-		<div class="swiper__slide__inner__list"><b>Размер:</b> 125х55х102</div>
-		<div class="swiper__slide__inner__list swiper__slide__inner__list-last"><b>Плотность:</b>
-			D500</div> -->
 
 		<a href="<?php echo $product->add_to_cart_url() ?>" class="swiper__slide__inner__addbasket" type="button"><?php echo $product->add_to_cart_text() ?></a>
 	</div>

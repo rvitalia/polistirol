@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying product content in the single-product.php template
  *
@@ -15,23 +16,309 @@
  * @version 3.6.0
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 global $product;
 
+?>
+
+
+<main class="main">
+	<section <?php wc_product_class('productinfo', $product); ?>>
+		<?php do_action('woocommerce_before_single_product'); ?>
+		<div class="container container-product">
+
+			<div class="productinfo__wrapper">
+				<button class="productinfo__inner__back" onclick="history.back();">
+					<img src="<?php bloginfo('template_directory'); ?> /assets/images/products/Arrow 3.svg" alt="arrow">Назад
+				</button>
+				<div class="productinfo__inner">
+					<div class="productinfo__inner__left">
+						<h2 class="productinfo__inner__right__title productinfo__inner__right__title__mobile"><?php the_title(); ?></h2>
+
+						<!-- Начало галереи							 -->
+
+						<?php
+						// $product_image_id = $product->get_image_id();
+						$product_gallery_ids = $product->get_gallery_image_ids();;
+						?>
+
+						<div id="main-carousel" class="splide splide-main" aria-label="My Awesome Gallery">
+							<div class="splide__track">
+								<ul class="splide__list splide__list__main">
+
+									<!-- цикл для больших картинок							 -->
+
+									<?php foreach ($product_gallery_ids as $product_gallery_id) :  ?>
+
+										<li class="splide__slide splide__slide__main">
+											<div class="splide__slide__main__wrapper">
+												<svg class="header__inner__widgets__favorites productinfo__inner__right__buttons__favourites splide_favourite --mobile" id="favourite">
+													<use xlink:href="#favorites"></use>
+												</svg>
+												<?php echo wp_get_attachment_image($product_gallery_id, 'full'); ?>
+											</div>
+										</li>
+
+									<?php endforeach; ?>
+
+								</ul>
+							</div>
+						</div>
+
+						<ul id="thumbnails" class="thumbnails">
+							<!-- цикл для миниатюр							 -->
+
+							<?php foreach ($product_gallery_ids as $product_gallery_id) :  ?>
+
+								<li class="thumbnail thumbnail__main">
+
+									<?php echo wp_get_attachment_image($product_gallery_id, 'woocommerce_gallery_thumbnail'); ?>
+									<!-- woocommerce_gallery_thumbnail - выводит миниатюры 100*100 -->
+									<!-- <img src="./assets/images/products/blocksmall1.png" alt=""> -->
+								</li>
+							<?php endforeach; ?>
+
+						</ul>
+
+						<!-- Конец галереи							 -->
+
+
+
+						<div class="content__loaded" data-insert>
+
+						</div>
+
+
+
+						<h5 class="productinfo__inner__left__title">Технические особенности</h5>
+						<?php
+						if ($product->get_attributes()) {
+						wc_display_product_attributes($product);
+						} ?>
+						<!-- <div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Длина кабеля </span>
+							<span class="productinfo__inner__left__data__digit">250 см</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Количество скоростей </span>
+							<span class="productinfo__inner__left__data__digit">2 шт.</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Количество режимов работы </span>
+							<span class="productinfo__inner__left__data__digit">3</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Мощность устройства </span>
+							<span class="productinfo__inner__left__data__digit">2000 Вт</span>
+						</div> -->
+					</div>
+
+
+
+
+
+					<div class="productinfo__inner__right" data-content>
+						<h2 class="productinfo__inner__right__title"><?php the_title(); ?></h2>
+						<span class="productinfo__inner__right__data"><?php echo $product->get_description(); ?></span>
+						<div class="productinfo__inner__right__data__container">
+
+							<!-- Выбор вариативного товара -->
+
+
+							<select name="" id="" class="productinfo__inner__right__size" size="1">
+								<option disabled selected>Размер</option>
+								<option value="size1">125х63х85</option>
+								<option value="size2">125х63х85</option>
+								<option value="size3">125х63х85</option>
+							</select>
+
+
+							<!-- Есть ли товар в наличии. Если есть то  есть, если нет - то предзаказ -->
+
+							<?php if ($product->is_in_stock()) {
+								echo ' <div class="productinfo__inner__right__availibility">
+                                    В наличии <span class="productinfo__inner__right__availibility__count"> есть</span>
+                                </div>';
+							} else {
+								echo '<a class="productinfo__inner__right__availibility productinfo__inner__right__noneavailibility"
+                                    href=""> Предзаказ</a>';
+							} ?>
+
+						</div>
+
+						<!-- Вывести выбранные параметры вариативного товара -->
+						<div class="productinfo__inner__right__parametrs">
+							<div class="productinfo__inner__right__parametrs__height"><b>Высота</b><input class="productinfo__inner__right__parametrs__input"></div>
+							<div class="productinfo__inner__right__parametrs__width"><b>Ширина</b><input class="productinfo__inner__right__parametrs__input"></div>
+						</div>
+
+						<!-- Счетчик товара -->
+
+
+						<div class="productinfo__inner__right__dataprice">
+							<div class="productinfo__inner__right__dataprice__minus" data-operation="minus">-</div>
+							<div class="productinfo__inner__right__dataprice__count">1</div>
+							<div class="productinfo__inner__right__dataprice__plus" data-operation="plus">+</div>
+							<div class="productinfo__inner__right__dataprice__price"><?php echo $product->get_price_html() ?></div>
+						</div>
+
+						<!-- Добавление в корзину -->
+
+						<?php woocommerce_template_single_add_to_cart(); ?>
+
+						<div class="productinfo__inner__right__buttons">
+							<button type="button" class="productinfo__inner__right__battons__addbasket">Добавить в
+								корзину</button>
+							<svg class="header__inner__widgets__favorites productinfo__inner__right__buttons__favourites" id="favourite">
+								<use xlink:href="#favorites"></use>
+							</svg>
+						</div>
+
+
+
+
+						<h5 class="productinfo__inner__left__title">Дополнительная информация</h5>
+						<?php
+						if ($product->get_attributes()) {
+						wc_display_product_attributes($product);
+						} ?>
+						
+						<!-- <div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Длина товара</span>
+							<span class="productinfo__inner__left__data__digit"><?php echo $product->get_length(); ?> см</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Высота товара</span>
+							<span class="productinfo__inner__left__data__digit"><?php echo $product->get_height(); ?> см</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Ширина товара </span>
+							<span class="productinfo__inner__left__data__digit"><?php echo $product->get_width(); ?> см</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Вес товара без упаковки (кг)</span>
+							<span class="productinfo__inner__left__data__digit"><?php echo $product->get_weight(); ?> кг</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Страна производства </span>
+							<span class="productinfo__inner__left__data__digit">Китай</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Ширина предмета </span>
+							<span class="productinfo__inner__left__data__digit">7.5 см</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Вес товара с упаковкой (г)</span>
+							<span class="productinfo__inner__left__data__digit">900 г</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Вес товара с упаковкой (г)</span>
+							<span class="productinfo__inner__left__data__digit">900 г</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Вес товара с упаковкой (г)</span>
+							<span class="productinfo__inner__left__data__digit">900 г</span>
+						</div>
+						<div class="productinfo__inner__left__data">
+							<span class="productinfo__inner__left__data__item">Вес товара с упаковкой (г)</span>
+							<span class="productinfo__inner__left__data__digit">900 г</span>
+						</div> -->
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+	<section class="similar">
+		<div class="container  container-product">
+			<div class="similar__inner">
+				<h1 class="similar__inner__title similar__inner__title--center">Похожие товары</h1>
+				<div class="similar__inner__wrapper similar__inner__wrapper--none">
+					<div class="similar__inner__wrapper__item">
+						<div class="similar__inner__wrapper__item_background">
+							<img src="./assets/images/similar/135843-PhotoRoom.png" alt="">
+						</div>
+						<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
+						<span class="similar__inner__wrapper__item__price">9 900 р.</span>
+					</div>
+					<div class="similar__inner__wrapper__item">
+						<div class="similar__inner__wrapper__item_background">
+							<img src="./assets/images/similar/466_original-PhotoRoom.png" alt="">
+						</div>
+						<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
+						<span class="similar__inner__wrapper__item__price">9 900 р.</span>
+					</div>
+					<div class="similar__inner__wrapper__item">
+						<div class="similar__inner__wrapper__item_background">
+							<img src="./assets/images/similar/135843-PhotoRoom.png" alt="">
+						</div>
+						<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
+						<span class="similar__inner__wrapper__item__price">9 900 р.</span>
+					</div>
+				</div>
+
+				<div class="swiper swiper__similar">
+					<!-- Additional required wrapper -->
+					<div class="swiper-wrapper">
+						<!-- Slides -->
+						<div class="swiper-slide">
+							<div class="similar__inner__wrapper__item similar__inner__wrapper__item--mobile">
+								<div class="similar__inner__wrapper__item_background similar__inner__wrapper__item_background--mobile">
+									<img src="./assets/images/similar/135843-PhotoRoom.png" alt="">
+								</div>
+								<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
+								<span class="similar__inner__wrapper__item__price">9 900 р.</span>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="similar__inner__wrapper__item similar__inner__wrapper__item--mobile">
+								<div class="similar__inner__wrapper__item_background similar__inner__wrapper__item_background--mobile">
+									<img src="./assets/images/similar/135843-PhotoRoom.png" alt="">
+								</div>
+								<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
+								<span class="similar__inner__wrapper__item__price">9 900 р.</span>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="similar__inner__wrapper__item similar__inner__wrapper__item--mobile">
+								<div class="similar__inner__wrapper__item_background similar__inner__wrapper__item_background--mobile">
+									<img src="./assets/images/similar/135843-PhotoRoom.png" alt="">
+								</div>
+								<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
+								<span class="similar__inner__wrapper__item__price">9 900 р.</span>
+							</div>
+						</div>
+
+					</div>
+
+
+					<!-- If we need navigation buttons -->
+					<div class="swiper-button-prev button-prev-similar"></div>
+					<div class="swiper-button-next button-next-similar"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+
+
+<?php
 /**
  * Hook: woocommerce_before_single_product.
  *
  * @hooked woocommerce_output_all_notices - 10
  */
-do_action( 'woocommerce_before_single_product' );
+do_action('woocommerce_before_single_product');
 
-if ( post_password_required() ) {
+if (post_password_required()) {
 	echo get_the_password_form(); // WPCS: XSS ok.
 	return;
 }
 ?>
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
+<div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
 	<?php
 	/**
@@ -40,7 +327,7 @@ if ( post_password_required() ) {
 	 * @hooked woocommerce_show_product_sale_flash - 10
 	 * @hooked woocommerce_show_product_images - 20
 	 */
-	do_action( 'woocommerce_before_single_product_summary' );
+	do_action('woocommerce_before_single_product_summary');
 	?>
 
 	<div class="summary entry-summary">
@@ -57,7 +344,7 @@ if ( post_password_required() ) {
 		 * @hooked woocommerce_template_single_sharing - 50
 		 * @hooked WC_Structured_Data::generate_product_data() - 60
 		 */
-		do_action( 'woocommerce_single_product_summary' );
+		do_action('woocommerce_single_product_summary');
 		?>
 	</div>
 
@@ -69,8 +356,8 @@ if ( post_password_required() ) {
 	 * @hooked woocommerce_upsell_display - 15
 	 * @hooked woocommerce_output_related_products - 20
 	 */
-	do_action( 'woocommerce_after_single_product_summary' );
+	do_action('woocommerce_after_single_product_summary');
 	?>
 </div>
 
-<?php do_action( 'woocommerce_after_single_product' ); ?>
+<?php do_action('woocommerce_after_single_product'); ?>
