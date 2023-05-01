@@ -3023,7 +3023,8 @@ body {
   z-index: -1;
   margin-left: 2.1rem;
 }
-.shop_attributes{
+
+.shop_attributes {
   width: 100%;
 }
 
@@ -3230,6 +3231,7 @@ body {
   justify-content: center;
   border-radius: 2rem;
   position: relative;
+  overflow: hidden;
 }
 
 @media (max-width: 1440px) {
@@ -3494,6 +3496,25 @@ body {
   margin-bottom: 2.5rem;
 }
 
+#pa_size {
+  width: 317px;
+  height: 42px;
+  border: 1px solid #D9D9D9;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  color: #1E1C1C;
+  padding-left: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+#pa_size>option {
+  font-size: 1.8rem;
+}
+
+
 .productinfo__inner__right__size>option {
   font-size: 1.8rem;
 }
@@ -3614,7 +3635,7 @@ body {
   margin-top: 4rem;
   margin-bottom: 4rem;
   width: 100%;
-  max-width: 47.4rem;
+  /* max-width: 47.4rem; */
 }
 
 @media (max-width: 1440px) {
@@ -3655,6 +3676,8 @@ body {
   cursor: pointer;
   color: #4D4D4D;
   padding-top: 1.2rem;
+  transition: all 0.5s linear;
+
 }
 
 @media (max-width: 1440px) {
@@ -3667,6 +3690,24 @@ body {
   .productinfo__inner__right__dataprice__minus {
     font-size: 2.8rem;
   }
+}
+
+.productinfo__inner__right__dataprice__minus:active,
+.productinfo__inner__right__dataprice__plus:active {
+  transform: translateY(-5px);
+  color: #76CD71;
+}
+
+.wordpress__counter__container {
+  display: flex;
+  /* align-items: center; */
+}
+
+.wordpress__counter__container__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 1rem;
 }
 
 .productinfo__inner__right__dataprice__count {
@@ -3683,7 +3724,9 @@ body {
   color: rgba(0, 0, 0, 0.7);
   width: 90px;
   height: 90px;
-  border: 1px solid #D9D9D9;
+  /* border: none; */
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  text-align: center;
 }
 
 @media (max-width: 1440px) {
@@ -3714,6 +3757,8 @@ body {
   white-space: nowrap;
   color: #4D4D4D;
   cursor: pointer;
+  transition: all 0.5s linear;
+
 }
 
 @media (max-width: 1440px) {
@@ -3728,11 +3773,15 @@ body {
   }
 }
 
-.productinfo__inner__right__dataprice__price>.woocommerce-Price-amount>bdi {
+.productinfo__inner__right__dataprice__price {
+  font-size: 4rem;
+}
+
+.productinfo__inner__right__dataprice__price>.price>.woocommerce-Price-amount>bdi {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
-  font-size: 50px;
+  font-size: inherit;
   line-height: 61px;
   text-align: right;
   letter-spacing: -0.05em;
@@ -3756,7 +3805,7 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 43.6rem;
+  max-width: 58.6rem;
   margin-bottom: 1.6rem;
 }
 
@@ -3786,13 +3835,14 @@ body {
   padding: 2rem 6.5rem;
   cursor: pointer;
   white-space: nowrap;
-  border: none;
+  border: 1px solid #76CD71;
   transition: all 0.3s linear;
   border-radius: 50px;
 }
 
 .productinfo__inner__right__battons__addbasket:hover {
-  transform: scale(1.02);
+  color: #76CD71;
+  background-color: white;
 }
 
 @media (max-width: 1440px) {
@@ -3806,7 +3856,7 @@ body {
   width: 51px;
   height: 42px;
   max-height: none;
-
+  margin-left: auto;
 }
 
 /* .splide_favourite {
@@ -6299,4 +6349,16 @@ footer {
 
 .modalcall__inner__agreement>a {
   color: #41743E;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none; // Yeah, yeah everybody write about it
+}
+
+input[type='number'],
+input[type="number"]:hover,
+input[type="number"]:focus {
+  appearance: none;
+  -moz-appearance: textfield;
 }

@@ -39,11 +39,17 @@ if (empty($product) || !$product->is_visible()) {
 			<h5 class="swiper__slide__inner__title"> <?php echo $product->get_title(); ?></h5>
 		</a>
 		<span class="swiper__slide__inner__price"><?php echo $product->get_price_html(); ?></span>
-		
-		<?php 
+
+
+		<!-- Вывод атрибутов под карточкой каталога -->
+
+		<?php
 		if ($product->get_attributes()) {
 			wc_display_product_attributes($product);
 		} ?>
+
+		<!-- Конец вывода атрибутов под карточкой каталога -->
+
 
 		<a href="<?php echo $product->add_to_cart_url() ?>" class="swiper__slide__inner__addbasket" type="button"><?php echo $product->add_to_cart_text() ?></a>
 	</div>

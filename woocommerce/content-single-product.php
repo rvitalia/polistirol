@@ -89,29 +89,17 @@ global $product;
 
 						</div>
 
-
+						<!-- Вывод атрибутов под галереей -->
 
 						<h5 class="productinfo__inner__left__title">Технические особенности</h5>
 						<?php
 						if ($product->get_attributes()) {
-						wc_display_product_attributes($product);
+							wc_display_product_attributes($product);
 						} ?>
-						<!-- <div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Длина кабеля </span>
-							<span class="productinfo__inner__left__data__digit">250 см</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Количество скоростей </span>
-							<span class="productinfo__inner__left__data__digit">2 шт.</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Количество режимов работы </span>
-							<span class="productinfo__inner__left__data__digit">3</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Мощность устройства </span>
-							<span class="productinfo__inner__left__data__digit">2000 Вт</span>
-						</div> -->
+
+						<!-- Конец вывода атрибутов под галереей -->
+
+
 					</div>
 
 
@@ -121,109 +109,34 @@ global $product;
 					<div class="productinfo__inner__right" data-content>
 						<h2 class="productinfo__inner__right__title"><?php the_title(); ?></h2>
 						<span class="productinfo__inner__right__data"><?php echo $product->get_description(); ?></span>
-						<div class="productinfo__inner__right__data__container">
-
-							<!-- Выбор вариативного товара -->
-
-
-							<select name="" id="" class="productinfo__inner__right__size" size="1">
-								<option disabled selected>Размер</option>
-								<option value="size1">125х63х85</option>
-								<option value="size2">125х63х85</option>
-								<option value="size3">125х63х85</option>
-							</select>
-
 
 							<!-- Есть ли товар в наличии. Если есть то  есть, если нет - то предзаказ -->
 
-							<?php if ($product->is_in_stock()) {
-								echo ' <div class="productinfo__inner__right__availibility">
+							<!-- <?php if ($product->is_in_stock()) {
+										echo ' <div class="productinfo__inner__right__availibility">
                                     В наличии <span class="productinfo__inner__right__availibility__count"> есть</span>
                                 </div>';
-							} else {
-								echo '<a class="productinfo__inner__right__availibility productinfo__inner__right__noneavailibility"
+									} else {
+										echo '<a class="productinfo__inner__right__availibility productinfo__inner__right__noneavailibility"
                                     href=""> Предзаказ</a>';
-							} ?>
+									} ?> -->
 
-						</div>
+							<!-- Конец выбора  -->
+
+		
 
 						<!-- Вывести выбранные параметры вариативного товара -->
-						<div class="productinfo__inner__right__parametrs">
-							<div class="productinfo__inner__right__parametrs__height"><b>Высота</b><input class="productinfo__inner__right__parametrs__input"></div>
-							<div class="productinfo__inner__right__parametrs__width"><b>Ширина</b><input class="productinfo__inner__right__parametrs__input"></div>
-						</div>
-
+						<!-- Выбор вариативного товара -->
 						<!-- Счетчик товара -->
-
-
-						<div class="productinfo__inner__right__dataprice">
-							<div class="productinfo__inner__right__dataprice__minus" data-operation="minus">-</div>
-							<div class="productinfo__inner__right__dataprice__count">1</div>
-							<div class="productinfo__inner__right__dataprice__plus" data-operation="plus">+</div>
-							<div class="productinfo__inner__right__dataprice__price"><?php echo $product->get_price_html() ?></div>
-						</div>
-
 						<!-- Добавление в корзину -->
 
 						<?php woocommerce_template_single_add_to_cart(); ?>
 
-						<div class="productinfo__inner__right__buttons">
-							<button type="button" class="productinfo__inner__right__battons__addbasket">Добавить в
-								корзину</button>
-							<svg class="header__inner__widgets__favorites productinfo__inner__right__buttons__favourites" id="favourite">
-								<use xlink:href="#favorites"></use>
-							</svg>
-						</div>
-
-
-
-
 						<h5 class="productinfo__inner__left__title">Дополнительная информация</h5>
 						<?php
 						if ($product->get_attributes()) {
-						wc_display_product_attributes($product);
+							wc_display_product_attributes($product);
 						} ?>
-						
-						<!-- <div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Длина товара</span>
-							<span class="productinfo__inner__left__data__digit"><?php echo $product->get_length(); ?> см</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Высота товара</span>
-							<span class="productinfo__inner__left__data__digit"><?php echo $product->get_height(); ?> см</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Ширина товара </span>
-							<span class="productinfo__inner__left__data__digit"><?php echo $product->get_width(); ?> см</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Вес товара без упаковки (кг)</span>
-							<span class="productinfo__inner__left__data__digit"><?php echo $product->get_weight(); ?> кг</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Страна производства </span>
-							<span class="productinfo__inner__left__data__digit">Китай</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Ширина предмета </span>
-							<span class="productinfo__inner__left__data__digit">7.5 см</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Вес товара с упаковкой (г)</span>
-							<span class="productinfo__inner__left__data__digit">900 г</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Вес товара с упаковкой (г)</span>
-							<span class="productinfo__inner__left__data__digit">900 г</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Вес товара с упаковкой (г)</span>
-							<span class="productinfo__inner__left__data__digit">900 г</span>
-						</div>
-						<div class="productinfo__inner__left__data">
-							<span class="productinfo__inner__left__data__item">Вес товара с упаковкой (г)</span>
-							<span class="productinfo__inner__left__data__digit">900 г</span>
-						</div> -->
 
 					</div>
 				</div>

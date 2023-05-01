@@ -1,13 +1,12 @@
 <?php
 
-if( function_exists('acf_add_options_page') ) {
-    
+if (function_exists('acf_add_options_page')) {
+
 	acf_add_options_page();
-	
 }
 
 
-if( function_exists('acf_add_options_page') ) {
+if (function_exists('acf_add_options_page')) {
 
 	acf_add_options_page(array(
 		'page_title'    => 'Theme General Settings',
@@ -16,50 +15,50 @@ if( function_exists('acf_add_options_page') ) {
 		'capability'    => 'edit_posts',
 		'redirect'      => false
 	));
-	
+
 	acf_add_options_sub_page(array(
 		'page_title'    => 'Theme Header Settings',
 		'menu_title'    => 'Header',
 		'parent_slug'   => 'theme-general-settings',
 	));
-	
+
 	acf_add_options_sub_page(array(
 		'page_title'    => 'Theme Footer Settings',
 		'menu_title'    => 'Footer',
 		'parent_slug'   => 'theme-general-settings',
 	));
-	
 }
 
 //добавляем возможность загрузки svg
-add_filter( 'upload_mimes', 'svg_upload_allow' );
+add_filter('upload_mimes', 'svg_upload_allow');
 
 # Добавляет SVG в список разрешенных для загрузки файлов.
-function svg_upload_allow( $mimes ) {
+function svg_upload_allow($mimes)
+{
 	$mimes['svg']  = 'image/svg+xml';
 
 	return $mimes;
 }
 
-add_filter( 'wp_check_filetype_and_ext', 'fix_svg_mime_type', 10, 5 );
+add_filter('wp_check_filetype_and_ext', 'fix_svg_mime_type', 10, 5);
 
 # Исправление MIME типа для SVG файлов.
-function fix_svg_mime_type( $data, $file, $filename, $mimes, $real_mime = '' ){
+function fix_svg_mime_type($data, $file, $filename, $mimes, $real_mime = '')
+{
 
 	// WP 5.1 +
-	if( version_compare( $GLOBALS['wp_version'], '5.1.0', '>=' ) ){
-		$dosvg = in_array( $real_mime, [ 'image/svg', 'image/svg+xml' ] );
-	}
-	else {
-		$dosvg = ( '.svg' === strtolower( substr( $filename, -4 ) ) );
+	if (version_compare($GLOBALS['wp_version'], '5.1.0', '>=')) {
+		$dosvg = in_array($real_mime, ['image/svg', 'image/svg+xml']);
+	} else {
+		$dosvg = ('.svg' === strtolower(substr($filename, -4)));
 	}
 
 	// mime тип был обнулен, поправим его
 	// а также проверим право пользователя
-	if( $dosvg ){
+	if ($dosvg) {
 
 		// разрешим
-		if( current_user_can('manage_options') ){
+		if (current_user_can('manage_options')) {
 
 			$data['ext']  = 'svg';
 			$data['type'] = 'image/svg+xml';
@@ -69,7 +68,6 @@ function fix_svg_mime_type( $data, $file, $filename, $mimes, $real_mime = '' ){
 			$data['ext']  = false;
 			$data['type'] = false;
 		}
-
 	}
 
 	return $data;
@@ -81,14 +79,13 @@ add_action('wp_enqueue_scripts', function () {
 	wp_enqueue_style('style-name', get_template_directory_uri() . '/assets/css/style.min.css');
 
 
-	if (is_shop()) : 
-        wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.min.js', array(), '1.0.0', true);
-		 endif ;
+	if (is_shop()) :
+		wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.min.js', array(), '1.0.0', true);
+	endif;
 
 	if (is_product()) :
-        wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/main.min.js', array(), '1.0.0', true);
-	endif ;
-	
+		wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/main.min.js', array(), '1.0.0', true);
+	endif;
 });
 
 
@@ -253,15 +250,15 @@ function register_post_types()
 
 add_theme_support('post-thumbnails');
 add_theme_support('title-tag');
-add_theme_support('custom-logo'); 
-add_theme_support('woocommerce'); 
+add_theme_support('custom-logo');
+add_theme_support('woocommerce');
 
 add_filter('wpcf7_autop_or_not', '__return_false');
 
-add_filter('wpcf7_form_elements', function($content) {
-    $content = preg_replace('/<(span).*?class="\s*(?:.*\s)?wpcf7-form-control-wrap(?:\s[^"]+)?\s*"[^\>]*>(.*)<\/\1>/i', '\2', $content);
+add_filter('wpcf7_form_elements', function ($content) {
+	$content = preg_replace('/<(span).*?class="\s*(?:.*\s)?wpcf7-form-control-wrap(?:\s[^"]+)?\s*"[^\>]*>(.*)<\/\1>/i', '\2', $content);
 
-    return $content;
+	return $content;
 });
 
 
@@ -271,16 +268,35 @@ add_filter('wpcf7_form_elements', function($content) {
 // };
 // add_filter( 'woocommerce_product_single_add_to_cart_text', 'filter_woocommerce_product_single_add_to_cart_text', 10, 2 );
 
-add_filter( 'woocommerce_product_single_add_to_cart_text', 'woocommerce_add_to_cart_button_text_single' ); 
-function woocommerce_add_to_cart_button_text_single() {
-    return __( 'Добавить в корзину', 'woocommerce' ); 
+add_filter('woocommerce_product_single_add_to_cart_text', 'woocommerce_add_to_cart_button_text_single');
+function woocommerce_add_to_cart_button_text_single()
+{
+	return __('Добавить в корзину', 'woocommerce');
 }
 
 // Change add to cart text on product archives page
-add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_add_to_cart_button_text_archives' );  
-function woocommerce_add_to_cart_button_text_archives() {
-    return __( 'Добавить в корзину', 'woocommerce' );
+add_filter('woocommerce_product_add_to_cart_text', 'woocommerce_add_to_cart_button_text_archives');
+function woocommerce_add_to_cart_button_text_archives()
+{
+	return __('Добавить в корзину', 'woocommerce');
 }
 
-remove_action( 'woocommerce_before_main_content','woocommerce_breadcrumb', 20);
-remove_action( 'woocommerce_sidebar','woocommerce_get_sidebar', 10);
+remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
+
+
+
+add_action('wp_footer', function () {
+
+?><script>
+
+	jQuery(function($){
+		$('.single_variation_wrap').on('show_variation',function(event,variation){
+			// console.log(variation);
+			$('#current_price').html(variation.price_html);
+			$('#availibility').html(variation.availability_html);
+		});
+	});
+
+</script><?php
+});
