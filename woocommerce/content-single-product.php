@@ -101,29 +101,25 @@ global $product;
 
 
 					</div>
-
-
-
-
-
+					
 					<div class="productinfo__inner__right" data-content>
 						<h2 class="productinfo__inner__right__title"><?php the_title(); ?></h2>
 						<span class="productinfo__inner__right__data"><?php echo $product->get_description(); ?></span>
 
-							<!-- Есть ли товар в наличии. Если есть то  есть, если нет - то предзаказ -->
+						<!-- Есть ли товар в наличии. Если есть то  есть, если нет - то предзаказ -->
 
-							<!-- <?php if ($product->is_in_stock()) {
-										echo ' <div class="productinfo__inner__right__availibility">
+						<!-- <?php if ($product->is_in_stock()) {
+									echo ' <div class="productinfo__inner__right__availibility">
                                     В наличии <span class="productinfo__inner__right__availibility__count"> есть</span>
                                 </div>';
-									} else {
-										echo '<a class="productinfo__inner__right__availibility productinfo__inner__right__noneavailibility"
+								} else {
+									echo '<a class="productinfo__inner__right__availibility productinfo__inner__right__noneavailibility"
                                     href=""> Предзаказ</a>';
-									} ?> -->
+								} ?> -->
 
-							<!-- Конец выбора  -->
+						<!-- Конец выбора  -->
 
-		
+
 
 						<!-- Вывести выбранные параметры вариативного товара -->
 						<!-- Выбор вариативного товара -->
@@ -149,128 +145,43 @@ global $product;
 		<div class="container  container-product">
 			<div class="similar__inner">
 				<h1 class="similar__inner__title similar__inner__title--center">Похожие товары</h1>
-				<div class="similar__inner__wrapper similar__inner__wrapper--none">
-					<div class="similar__inner__wrapper__item">
-						<div class="similar__inner__wrapper__item_background">
-							<img src="./assets/images/similar/135843-PhotoRoom.png" alt="">
-						</div>
-						<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
-						<span class="similar__inner__wrapper__item__price">9 900 р.</span>
-					</div>
-					<div class="similar__inner__wrapper__item">
-						<div class="similar__inner__wrapper__item_background">
-							<img src="./assets/images/similar/466_original-PhotoRoom.png" alt="">
-						</div>
-						<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
-						<span class="similar__inner__wrapper__item__price">9 900 р.</span>
-					</div>
-					<div class="similar__inner__wrapper__item">
-						<div class="similar__inner__wrapper__item_background">
-							<img src="./assets/images/similar/135843-PhotoRoom.png" alt="">
-						</div>
-						<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
-						<span class="similar__inner__wrapper__item__price">9 900 р.</span>
-					</div>
-				</div>
+				<div class="similar__inner__wrapper">
 
-				<div class="swiper swiper__similar">
-					<!-- Additional required wrapper -->
-					<div class="swiper-wrapper">
-						<!-- Slides -->
-						<div class="swiper-slide">
-							<div class="similar__inner__wrapper__item similar__inner__wrapper__item--mobile">
-								<div class="similar__inner__wrapper__item_background similar__inner__wrapper__item_background--mobile">
-									<img src="./assets/images/similar/135843-PhotoRoom.png" alt="">
-								</div>
-								<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
-								<span class="similar__inner__wrapper__item__price">9 900 р.</span>
-							</div>
-						</div>
-						<div class="swiper-slide">
-							<div class="similar__inner__wrapper__item similar__inner__wrapper__item--mobile">
-								<div class="similar__inner__wrapper__item_background similar__inner__wrapper__item_background--mobile">
-									<img src="./assets/images/similar/135843-PhotoRoom.png" alt="">
-								</div>
-								<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
-								<span class="similar__inner__wrapper__item__price">9 900 р.</span>
-							</div>
-						</div>
-						<div class="swiper-slide">
-							<div class="similar__inner__wrapper__item similar__inner__wrapper__item--mobile">
-								<div class="similar__inner__wrapper__item_background similar__inner__wrapper__item_background--mobile">
-									<img src="./assets/images/similar/135843-PhotoRoom.png" alt="">
-								</div>
-								<h5 class="similar__inner__wrapper__item__subtitle">Полистиролбетон</h5>
-								<span class="similar__inner__wrapper__item__price">9 900 р.</span>
-							</div>
-						</div>
+				<?php
+					$related_products = array(); // array(5,10,35)
+					$upsells = $product->get_upsell_ids();
+					if ($upsells) {
+						//если заданы апсейлы ту выводим их
+						$related_products = $upsells;
 
-					</div>
+					} else {
+						//если не заданы апсейлы то выводим стандартную вукомерс функуию и указываем количество выводимых значений
+						$related_products = wc_get_related_products($product->get_id(), 5);
+					}
+					?>
 
+					<?php
+						woocommerce_product_loop_start();
+					
+					foreach ($related_products as $related_product) : ?>
 
-					<!-- If we need navigation buttons -->
-					<div class="swiper-button-prev button-prev-similar"></div>
-					<div class="swiper-button-next button-next-similar"></div>
-				</div>
+						<?php
+						$post_object = get_post($related_product);
+
+						setup_postdata($GLOBALS['post'] = &$post_object); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited, Squiz.PHP.DisallowMultipleAssignments.Found
+						
+					
+						wc_get_template_part('content', 'product');
+						
+						?>
+
+					<?php endforeach; 
+					
+					woocommerce_product_loop_end();
+					?>
+
 			</div>
 		</div>
 	</section>
 </main>
 
-
-<?php
-/**
- * Hook: woocommerce_before_single_product.
- *
- * @hooked woocommerce_output_all_notices - 10
- */
-do_action('woocommerce_before_single_product');
-
-if (post_password_required()) {
-	echo get_the_password_form(); // WPCS: XSS ok.
-	return;
-}
-?>
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
-
-	<?php
-	/**
-	 * Hook: woocommerce_before_single_product_summary.
-	 *
-	 * @hooked woocommerce_show_product_sale_flash - 10
-	 * @hooked woocommerce_show_product_images - 20
-	 */
-	do_action('woocommerce_before_single_product_summary');
-	?>
-
-	<div class="summary entry-summary">
-		<?php
-		/**
-		 * Hook: woocommerce_single_product_summary.
-		 *
-		 * @hooked woocommerce_template_single_title - 5
-		 * @hooked woocommerce_template_single_rating - 10
-		 * @hooked woocommerce_template_single_price - 10
-		 * @hooked woocommerce_template_single_excerpt - 20
-		 * @hooked woocommerce_template_single_add_to_cart - 30
-		 * @hooked woocommerce_template_single_meta - 40
-		 * @hooked woocommerce_template_single_sharing - 50
-		 * @hooked WC_Structured_Data::generate_product_data() - 60
-		 */
-		do_action('woocommerce_single_product_summary');
-		?>
-	</div>
-
-	<?php
-	/**
-	 * Hook: woocommerce_after_single_product_summary.
-	 *
-	 * @hooked woocommerce_output_product_data_tabs - 10
-	 * @hooked woocommerce_upsell_display - 15
-	 * @hooked woocommerce_output_related_products - 20
-	 */
-	do_action('woocommerce_after_single_product_summary');
-	?>
-</div>
-
-<?php do_action('woocommerce_after_single_product'); ?>

@@ -86,6 +86,9 @@ add_action('wp_enqueue_scripts', function () {
 	if (is_product()) :
 		wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/main.min.js', array(), '1.0.0', true);
 	endif;
+	if (is_cart()) :
+		wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/basket.min.js', array(), '1.0.0', true);
+	endif;
 });
 
 
@@ -284,19 +287,49 @@ function woocommerce_add_to_cart_button_text_archives()
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
 
-
+//отключаем доставку
+function delshipping_calc_in_cart( $show_shipping ) {
+    if( is_cart() ) {
+        return false;
+    }
+    return $show_shipping;
+}
+add_filter( 'woocommerce_cart_ready_to_calc_shipping', 'delshipping_calc_in_cart', 99 );
 
 add_action('wp_footer', function () {
 
 ?><script>
+		jQuery(function($) {
+			$('.single_variation_wrap').on('show_variation', function(event, variation) {
+				//  console.log(variation.availability_html);
+				$('#current_price').html(variation.price_html);
+				$('#availibility').html(variation.availability_html);
 
-	jQuery(function($){
-		$('.single_variation_wrap').on('show_variation',function(event,variation){
-			// console.log(variation);
-			$('#current_price').html(variation.price_html);
-			$('#availibility').html(variation.availability_html);
+				let textavailible = $('.in-stock').text();
+				//Проверка на число, содержит ли т.е. либбо в наличии - количество штук, либо нет  в наличии. 
+				function hasNumber(s) {
+					return /\d/.test(s);
+				}
+
+				if(hasNumber(textavailible)){
+					$('#availibility').html('В наличии <span class="productinfo__inner__right__availibility__count">есть</span>');
+				}
+				else{
+					$('#availibility').html('В наличии <span class="productinfo__inner__right__availibility__count">предзаказ</span>');					
+				}
+				// console.log(hasNumber(textavailible));
+			});
 		});
-	});
+		let basketTitles = document.querySelectorAll('#basket-title>a');
+		if (basketTitles.length>0 && basketTitles !== null)
+		basketTitles.forEach(element => {
+			let title = element.textContent;
+			let arrTitle = title.split('-');
+			element.textContent = arrTitle[0];
+		});
+		else{
+			//console.log(basketTitles);
+		}
 
-</script><?php
-});
+	</script><?php
+			});

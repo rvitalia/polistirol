@@ -23,7 +23,6 @@ defined('ABSPATH') || exit;
 
 /* translators: %s: Quantity. */
 $label = !empty($args['product_name']) ? sprintf(esc_html__('%s quantity', 'woocommerce'), wp_strip_all_tags($args['product_name'])) : esc_html__('Quantity', 'woocommerce');
-global $product;
 ?>
 <div class="quantity">
 	<?php
@@ -36,35 +35,70 @@ global $product;
 	?>
 
 	<!-- Вывести выбранные параметры вариативного товара -->
-	<div class="productinfo__inner__right__parametrs">
-		<div class="productinfo__inner__right__parametrs__height"><b>Высота</b><input class="productinfo__inner__right__parametrs__input"></div>
-		<div class="productinfo__inner__right__parametrs__width"><b>Ширина</b><input class="productinfo__inner__right__parametrs__input"></div>
-	</div>
+
+	<?php 
+	if (is_product()):
+		 echo '<div class="productinfo__inner__right__parametrs">
+		<div class="productinfo__inner__right__parametrs__height"><b>Высота</b><label class="productinfo__inner__right__parametrs__input" id="height"></label></div>
+		<div class="productinfo__inner__right__parametrs__width"><b>Ширина</b><label class="productinfo__inner__right__parametrs__input" id="width"></label></div>
+		<div class="productinfo__inner__right__parametrs__depth"><b>Глубина</b><label class="productinfo__inner__right__parametrs__input" id="depth"></label></div>
+		</div>'; endif;
+	?>
+	
 
 	<label class="screen-reader-text" for="<?php echo esc_attr($input_id); ?>"><?php echo esc_attr($label); ?></label>
 
 	<!-- type="<?php echo esc_attr($type); ?>" -->
 
-	<div class="productinfo__inner__right__dataprice">
-		<span class="productinfo__inner__right__dataprice__minus" data-operation="minus">-</span>
+	 <?php
+	if (is_product()):
+		echo '<div class="productinfo__inner__right__dataprice">'; 
+	else:
+		echo '<div class="basket__inner__container__left__item__counter__digit">';
+	endif; ?>
 
-		<input type="text" <?php echo $readonly ? 'readonly="readonly"' : ''; ?> 
+
+<?php
+	if (is_product()):
+		echo '<span class="productinfo__inner__right__dataprice__minus" data-operation="minus">-</span>'; 
+	else:
+		echo '<span class="basket__inner__container__left__item__counter__minus" data-operation="minus">-</span>';
+	endif; ?>
+
+		<input type="number" <?php echo $readonly ? 'readonly="readonly"' : ''; ?> 
 		id="<?php echo esc_attr($input_id); ?>" 
+
+		<?php if (is_product()):?>
 		class="<?php echo esc_attr(join(' ', (array) $classes)); ?> productinfo__inner__right__dataprice__count" 
+		<?php else:?>
+		class="<?php echo esc_attr(join(' ', (array) $classes)); ?> basket__inner__container__left__item__counter__digit" 
+		<?php endif; ?>
+
 		name="<?php echo esc_attr($input_name); ?>" 
 		value="<?php echo esc_attr($input_value); ?>" 
 		title="<?php echo esc_attr_x('Qty', 'Product quantity input tooltip', 'woocommerce'); ?>" 
-		size="4" datd-min="<?php echo esc_attr($min_value); ?>" 
-		datd-max="<?php echo esc_attr(0 < $max_value ? $max_value : ''); ?>" <?php if (!$readonly) : ?> 
-			data-step="<?php echo esc_attr($step); ?>" placeholder="<?php echo esc_attr($placeholder); ?>" 
+		size="4" 
+		min="<?php echo esc_attr($min_value); ?>" 
+		max="<?php echo esc_attr(0 < $max_value ? $max_value : ''); ?>" <?php if (!$readonly) : ?> 
+			step="<?php echo esc_attr($step); ?>" placeholder="<?php echo esc_attr($placeholder); ?>" 
 			inputmode="<?php echo esc_attr($inputmode); ?>" 
 			autocomplete="<?php echo esc_attr(isset($autocomplete) ? $autocomplete : 'on'); ?>" <?php endif; ?> 
 			data-count="digit__count"/>
 
-		<span class="productinfo__inner__right__dataprice__plus" data-operation="plus">+</span>
-		<div class="productinfo__inner__right__dataprice__price" id="current_price"><?php echo $product->get_price_html() ?></div>
-	</div>
 
+			<?php
+	if (is_product()):
+		echo '<span class="productinfo__inner__right__dataprice__plus" data-operation="plus">+</span>'; 
+	else:
+		echo '<span class="basket__inner__container__left__item__counter__plus" data-operation="plus">+</span>';
+	endif; ?>
+
+		
+
+
+		<div class="productinfo__inner__right__dataprice__price" id="current_price">
+</div>
+	</div>
 
 
 

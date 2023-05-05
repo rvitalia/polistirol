@@ -32,22 +32,6 @@ get_header('');
 
 <main class="main">
 
-
-	<svg display="none">
-		<symbol id="next" viewBox="0 0 32 32">
-
-			<path d="M31.71,15.29l-10-10L20.29,6.71,28.59,15H0v2H28.59l-8.29,8.29,1.41,1.41,10-10A1,1,0,0,0,31.71,15.29Z" />
-
-		</symbol>
-	</svg>
-	<svg display="none">
-		<symbol id="prev" viewBox="0 0 32 32">
-
-			<path d="M32,15H3.41l8.29-8.29L10.29,5.29l-10,10a1,1,0,0,0,0,1.41l10,10,1.41-1.41L3.41,17H32Z" />
-
-
-		</symbol>
-	</svg>
 	<svg display="none">
 		<symbol id="whatsapp" viewBox="0 0 100 100">
 

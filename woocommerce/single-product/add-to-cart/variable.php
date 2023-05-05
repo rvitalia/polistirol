@@ -63,7 +63,7 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
 			</table>
 
 			<div class="productinfo__inner__right__availibility" id="availibility"> 
-				<span class="productinfo__inner__right__availibility__count"> есть</span>
+				<span class="productinfo__inner__right__availibility__count"></span>
 			</div>;
 		</div>
 
