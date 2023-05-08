@@ -29,9 +29,10 @@ if (empty($product) || !$product->is_visible()) {
 
 <div <?php wc_product_class('swiper-slide swiper-slide-catalog', $product); ?>>
 	<div class="swiper__slide__inner">
-		<svg class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
-			<use xlink:href="#favorites"></use>
-		</svg>
+		<div class="header__inner__widgets__favorites swiper__slide__inner__favourites" data-heart>
+			<!-- <use xlink:href="#favorites"></use> -->
+			<?php echo do_shortcode("[ti_wishlists_addtowishlist loop=yes]"); ?>
+		</div>
 		<a href="<?php echo $product->get_permalink(); ?>">
 			<div class="swiper__slide__inner__image"><?php echo $product->get_image(); ?></div>
 		</a>

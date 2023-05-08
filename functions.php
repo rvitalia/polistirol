@@ -98,37 +98,6 @@ wp_deregister_style('woocommerce-layout');
 add_action('init', 'register_post_types');
 
 
-// function abrosco__scripts() {
-// 	if ( is_page(7) ) {
-// 		// отменяем зарегистрированный jQuery
-// 		wp_deregister_script( 'jquery' );
-// 		wp_register_script( 'jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js');
-
-// 		wp_enqueue_script( 'jquery');
-// 		wp_enqueue_script( 'scroll-magic', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js', null, true );
-// 		// wp_enqueue_script( 'particleJS', 'http://www.jsdelivr.com/#!particles.js', null, true );
-// 		wp_enqueue_script( 'app', get_template_directory_uri() .'/assets/js/app.js', array('jquery'), null, true );
-// 	}
-// 	if ( is_page(196) ) {
-// 		wp_enqueue_script( 'main', get_template_directory_uri() .'/assets/js/main.js', array(), null, true );
-// 	}
-// 		if ( is_page(355) ) {
-// 		wp_enqueue_script( 'project', get_template_directory_uri() .'/assets/js/project.js', array(), null, true );
-// 	}
-// 		if ( is_page(721) ) {
-// 		wp_enqueue_script( 'news', get_template_directory_uri() .'/assets/js/news.js', array(), null, true );
-// 	}
-// }
-
-
-
-// add_action( 'after_setup_theme', 'theme_register_nav_menu' );
-
-// function theme_register_nav_menu() {
-// 	register_nav_menu( 'Top', 'Меню в шапке справа' );
-// }
-
-
 function register_post_types()
 {
 
@@ -288,17 +257,38 @@ remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
 
 //отключаем доставку
-function delshipping_calc_in_cart( $show_shipping ) {
-    if( is_cart() ) {
-        return false;
-    }
-    return $show_shipping;
+function delshipping_calc_in_cart($show_shipping)
+{
+	if (is_cart()) {
+		return false;
+	}
+	return $show_shipping;
 }
-add_filter( 'woocommerce_cart_ready_to_calc_shipping', 'delshipping_calc_in_cart', 99 );
+add_filter('woocommerce_cart_ready_to_calc_shipping', 'delshipping_calc_in_cart', 99);
+
+/* Автоматическое обновление корзины в зависимости от изменения количества товара */
+add_action('wp_footer', 'cart_update_qty_script');
+
+function cart_update_qty_script()
+{
+	if (is_cart()) :
+?>
+		<script>
+			jQuery('div.woocommerce').on('change', '.qty', function() {
+				jQuery("[name='update_cart']").removeAttr('disabled');
+				jQuery("[name='update_cart']").trigger("click");
+			});
+		</script>
+	<?php
+
+	endif;
+}
+
+add_filter( 'woocommerce_cart_needs_payment', '__return_false' );
 
 add_action('wp_footer', function () {
 
-?><script>
+	?><script>
 		jQuery(function($) {
 			$('.single_variation_wrap').on('show_variation', function(event, variation) {
 				//  console.log(variation.availability_html);
@@ -311,25 +301,89 @@ add_action('wp_footer', function () {
 					return /\d/.test(s);
 				}
 
-				if(hasNumber(textavailible)){
+				if (hasNumber(textavailible)) {
 					$('#availibility').html('В наличии <span class="productinfo__inner__right__availibility__count">есть</span>');
-				}
-				else{
-					$('#availibility').html('В наличии <span class="productinfo__inner__right__availibility__count">предзаказ</span>');					
+				} else {
+					$('#availibility').html('В наличии <span class="productinfo__inner__right__availibility__count">предзаказ</span>');
 				}
 				// console.log(hasNumber(textavailible));
 			});
 		});
-		let basketTitles = document.querySelectorAll('#basket-title>a');
-		if (basketTitles.length>0 && basketTitles !== null)
-		basketTitles.forEach(element => {
-			let title = element.textContent;
-			let arrTitle = title.split('-');
-			element.textContent = arrTitle[0];
-		});
-		else{
-			//console.log(basketTitles);
+
+		function splitTitle() {
+			let basketTitles = document.querySelectorAll('#basket-title>a');
+			if (basketTitles.length > 0 && basketTitles !== null)
+				basketTitles.forEach(element => {
+					let title = element.textContent;
+					let arrTitle = title.split('-');
+					element.textContent = arrTitle[0];
+				});
+			else {
+				//console.log(basketTitles);
+			}
+		}
+		splitTitle();
+
+		function replaceCounter() {
+			if (window.innerWidth < 1000) {
+				let counters = document.querySelectorAll('[data-counter="replace"]');
+
+				counters.forEach(element => {
+					let parrentdiv = element.closest('.basket__inner__container__left__item__wrapper ');
+					// console.log(parrentdiv);
+
+					let currentcounter = parrentdiv.querySelector('[data-counterCurrent]');
+					// console.log(currentcounter);
+					let quantity = document.createElement('div');
+					quantity.classList.add('quantity');
+					currentcounter.appendChild(quantity);
+					quantity.appendChild(element);
+				});
+			}
 		}
 
+		replaceCounter();
+
+		function changeNameButton() {
+			let buttons = document.querySelectorAll('.tinvwl-txt');
+			buttons.forEach(element => {
+				let button = element;
+				if (button.textContent !== 'null' && button.textContent === 'Add to Cart') {
+					button.textContent = 'Добавить в корзину';
+				}
+				// if(button.textContent !== 'null' && button.textContent === 'Добавить в корзину'){
+				// 	button.textContent = 'Выбрать вариацию';
+				// }
+			});
+
+		}
+		changeNameButton();
+
+		function cancelDisabled(){
+			let button = document.querySelector('[name="update_cart"]');
+			let minuses = document.querySelectorAll('[data-operation="minus"]');
+			let pluses = document.querySelectorAll('[data-operation="plus"]');
+
+			minuses.forEach(element => {
+				element.addEventListener('click', ()=>{
+					button.removeAttribute('disabled');
+				})
+			});
+			pluses.forEach(element => {
+				element.addEventListener('click', ()=>{
+					button.removeAttribute('disabled');
+				})
+			});
+		}
+		cancelDisabled();
+
+		jQuery(document.body).on('updated_cart_totals', function() {
+			splitTitle();
+			replaceCounter();
+			cancelDisabled();
+		});
+		jQuery(document.body).on('remove', function() {
+			changeNameButton();
+		});
 	</script><?php
 			});

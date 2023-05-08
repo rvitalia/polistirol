@@ -54,7 +54,7 @@ $label = !empty($args['product_name']) ? sprintf(esc_html__('%s quantity', 'wooc
 	if (is_product()):
 		echo '<div class="productinfo__inner__right__dataprice">'; 
 	else:
-		echo '<div class="basket__inner__container__left__item__counter__digit">';
+		echo '<div class="basket__inner__container__left__item__counter__digit" data-counter="replace">';
 	endif; ?>
 
 

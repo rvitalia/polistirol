@@ -18,7 +18,7 @@
 
 defined('ABSPATH') || exit;
 
-do_action('woocommerce_before_cart'); ?>
+?>
 
 
 <main class="main">
@@ -34,7 +34,7 @@ do_action('woocommerce_before_cart'); ?>
 					<div class="basket__inner">
 						<h2 class="basket__inner__title">Корзина</h2>
 
-
+						<?php do_action('woocommerce_before_cart'); ?>
 						<div class="basket__inner__container">
 							<div class="basket__inner__container__left">
 								<div class="basket__inner__container__left__items shop_table shop_table_responsive cart woocommerce-cart-form__contents">
@@ -53,7 +53,7 @@ do_action('woocommerce_before_cart'); ?>
 
 
 
-											<div class="basket__inner__container__left__item__wrapper woocommerce-cart-form__cart-item cart_item">
+											<div class="basket__inner__container__left__item__wrapper woocommerce-cart-form__cart-item <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
 												<div class="basket__inner__container__left__item">
 													<div class="basket__inner__container__left__item__firstblock">
 
@@ -77,7 +77,7 @@ do_action('woocommerce_before_cart'); ?>
 
 														<!--------------------image----------------------- -->
 
-														<div class="basket__inner__container__left__item__preview ">
+														<div class="basket__inner__container__left__item__preview product-thumbnail">
 
 															<?php
 															$thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
@@ -91,7 +91,7 @@ do_action('woocommerce_before_cart'); ?>
 														</div>
 														<!--------------------Название товара----------------------- -->
 
-														<div class="basket__inner__container__left__item__description product-name">
+														<div class="basket__inner__container__left__item__description product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>">
 															<?php
 															if (!$product_permalink) {
 																echo wp_kses_post(apply_filters('woocommerce_cart_item_name ', $_product->get_name(), $cart_item, $cart_item_key) . '&nbsp;');
@@ -103,7 +103,7 @@ do_action('woocommerce_before_cart'); ?>
 													</div>
 													<!--------------------counter----------------------- -->
 
-													<div class="basket__inner__container__left__item__counter">
+													<div class="basket__inner__container__left__item__counter product-quantity">
 														<?php
 														if ($_product->is_sold_individually()) {
 															$min_quantity = 1;
@@ -151,7 +151,7 @@ do_action('woocommerce_before_cart'); ?>
 														<!--------------------mobile image----------------------- -->
 
 
-														<div class="basket__inner__container__left__item__mobiletop__img">
+														<div class="basket__inner__container__left__item__mobiletop__img product-thumbnail">
 															<!-- <div class="basket__inner__container__left__item__preview"> -->
 															<?php
 															$thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
@@ -182,7 +182,7 @@ do_action('woocommerce_before_cart'); ?>
 															<!--------------------mobile name----------------------- -->
 
 
-															<span class="basket__inner__container__left__item__name__mobile">
+															<span class="basket__inner__container__left__item__name__mobile product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>" >
 																<?php
 																if (!$product_permalink) {
 																	echo wp_kses_post(apply_filters('woocommerce_cart_item_name ', $_product->get_name(), $cart_item, $cart_item_key) . '&nbsp;');
@@ -200,30 +200,8 @@ do_action('woocommerce_before_cart'); ?>
 
 
 														<div class="basket__inner__container__left__item__counter basket__inner__container__left__item__counter__mobile">
-															<div class="basket__inner__container__left__item__counter__digit">
-																<?php
-																if ($_product->is_sold_individually()) {
-																	$min_quantity = 1;
-																	$max_quantity = 1;
-																} else {
-																	$min_quantity = 0;
-																	$max_quantity = $_product->get_max_purchase_quantity();
-																}
-
-																$product_quantity = woocommerce_quantity_input(
-																	array(
-																		'input_name'   => "cart[{$cart_item_key}][qty]",
-																		'input_value'  => $cart_item['quantity'],
-																		'max_value'    => $max_quantity,
-																		'min_value'    => $min_quantity,
-																		'product_name' => $_product->get_name(),
-																	),
-																	$_product,
-																	false
-																);
-
-																echo $product_quantity;
-																?>
+															<div class="basket__inner__container__left__item__counter__digit product-quantity" data-counterCurrent>
+															
 															</div>
 														</div>
 														<div class="basket__inner__container__left__item__mobilebottom__check">
@@ -245,42 +223,17 @@ do_action('woocommerce_before_cart'); ?>
 
 									<?php }
 									} ?>
-									<button type="submit" class="button<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>" name="update_cart" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Update cart', 'woocommerce'); ?></button>
+									<div class="update__cart__button">
+										<button type="submit" class="button<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>" name="update_cart" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Update cart', 'woocommerce'); ?></button>
+										<?php do_action( 'woocommerce_cart_actions' ); ?>
+										<?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
+									</div>
 
-
-
-
-									<!-- <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
-
-										<tbody>
-											<?php do_action('woocommerce_before_cart_contents'); ?>
-
-
-
-											<?php do_action('woocommerce_cart_contents'); ?>
-
-											<tr>
-												<td colspan="6" class="actions">
-
-
-
-
-													<?php do_action('woocommerce_cart_actions'); ?>
-
-													<?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
-												</td>
-											</tr>
-
-											<?php do_action('woocommerce_after_cart_contents'); ?>
-										</tbody>
-									</table> -->
 									<?php do_action('woocommerce_after_cart_table'); ?>
 
 								</div>
-								<button class="basket__inner__container__right__result__checkout__mobile">К оформлению <span
-                                        class="basket__inner__container__right__result__allprice basket__inner__container__right__result__allprice__mobile"
-                                        data-result="result"><?php woocommerce_cart_totals(); ?></span></button>
-                            
+								<button class="basket__inner__container__right__result__checkout__mobile">К оформлению <span class="basket__inner__container__right__result__allprice basket__inner__container__right__result__allprice__mobile" data-result="result"><?php woocommerce_cart_totals(); ?></span></button>
+
 							</div>
 
 							<div class="basket__inner__container__right">

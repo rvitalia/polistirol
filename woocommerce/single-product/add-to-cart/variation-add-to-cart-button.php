@@ -37,9 +37,10 @@ global $product;
 		<input type="hidden" name="variation_id" class="variation_id" value="0" />
 		<!-- <button type="button" class="productinfo__inner__right__battons__addbasket">Добавить в
 								корзину</button> -->
-		<svg class="header__inner__widgets__favorites productinfo__inner__right__buttons__favourites" id="favourite">
-			<use xlink:href="#favorites"></use>
-		</svg>
+		<div class="header__inner__widgets__favorites productinfo__inner__right__buttons__favourites">
+			<!-- <use xlink:href="#favorites"></use> --> 
+			<!-- <?php echo do_shortcode("[ti_wishlists_addtowishlist loop=yes]") ?> -->
+		</div>
 	</div>
 
 

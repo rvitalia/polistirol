@@ -25,7 +25,9 @@ global $product;
 
 <main class="main">
 	<section <?php wc_product_class('productinfo', $product); ?>>
+
 		<?php do_action('woocommerce_before_single_product'); ?>
+
 		<div class="container container-product">
 
 			<div class="productinfo__wrapper">
@@ -53,9 +55,9 @@ global $product;
 
 										<li class="splide__slide splide__slide__main">
 											<div class="splide__slide__main__wrapper">
-												<svg class="header__inner__widgets__favorites productinfo__inner__right__buttons__favourites splide_favourite --mobile" id="favourite">
-													<use xlink:href="#favorites"></use>
-												</svg>
+												<div class="header__inner__widgets__favorites productinfo__inner__right__buttons__favourites splide_favourite --mobile">
+													<!-- <?php echo do_shortcode("[ti_wishlists_addtowishlist loop=yes]"); ?> -->
+												</div>
 												<?php echo wp_get_attachment_image($product_gallery_id, 'full'); ?>
 											</div>
 										</li>
@@ -101,7 +103,7 @@ global $product;
 
 
 					</div>
-					
+
 					<div class="productinfo__inner__right" data-content>
 						<h2 class="productinfo__inner__right__title"><?php the_title(); ?></h2>
 						<span class="productinfo__inner__right__data"><?php echo $product->get_description(); ?></span>
@@ -147,13 +149,12 @@ global $product;
 				<h1 class="similar__inner__title similar__inner__title--center">Похожие товары</h1>
 				<div class="similar__inner__wrapper">
 
-				<?php
+					<?php
 					$related_products = array(); // array(5,10,35)
 					$upsells = $product->get_upsell_ids();
 					if ($upsells) {
 						//если заданы апсейлы ту выводим их
 						$related_products = $upsells;
-
 					} else {
 						//если не заданы апсейлы то выводим стандартную вукомерс функуию и указываем количество выводимых значений
 						$related_products = wc_get_related_products($product->get_id(), 5);
@@ -161,27 +162,26 @@ global $product;
 					?>
 
 					<?php
-						woocommerce_product_loop_start();
-					
+					woocommerce_product_loop_start();
+
 					foreach ($related_products as $related_product) : ?>
 
 						<?php
 						$post_object = get_post($related_product);
 
 						setup_postdata($GLOBALS['post'] = &$post_object); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited, Squiz.PHP.DisallowMultipleAssignments.Found
-						
-					
+
+
 						wc_get_template_part('content', 'product');
-						
+
 						?>
 
-					<?php endforeach; 
-					
+					<?php endforeach;
+
 					woocommerce_product_loop_end();
 					?>
 
+				</div>
 			</div>
-		</div>
 	</section>
 </main>
-
