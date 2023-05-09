@@ -27,7 +27,7 @@ defined('ABSPATH') || exit;
 		<div class="container container-basket">
 			<div class="basket__wrapper">
 				<button class="productinfo__inner__back" onclick="history.back();">
-					<img src="<?php bloginfo('template_directory'); ?> /assets/images/products/Arrow 3.svg" alt="arrow">Назад
+					<img src="<?php bloginfo('template_directory'); ?>/assets/images/products/Arrow 3.svg" alt="arrow">Назад
 				</button>
 				<form class="woocommerce-cart-form" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
 
@@ -53,7 +53,7 @@ defined('ABSPATH') || exit;
 
 
 
-											<div class="basket__inner__container__left__item__wrapper woocommerce-cart-form__cart-item <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
+											<div class="basket__inner__container__left__item__wrapper woocommerce-cart-form__cart-item <?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
 												<div class="basket__inner__container__left__item">
 													<div class="basket__inner__container__left__item__firstblock">
 
@@ -91,7 +91,7 @@ defined('ABSPATH') || exit;
 														</div>
 														<!--------------------Название товара----------------------- -->
 
-														<div class="basket__inner__container__left__item__description product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>">
+														<div class="basket__inner__container__left__item__description product-name" data-title="<?php esc_attr_e('Product', 'woocommerce'); ?>">
 															<?php
 															if (!$product_permalink) {
 																echo wp_kses_post(apply_filters('woocommerce_cart_item_name ', $_product->get_name(), $cart_item, $cart_item_key) . '&nbsp;');
@@ -182,7 +182,7 @@ defined('ABSPATH') || exit;
 															<!--------------------mobile name----------------------- -->
 
 
-															<span class="basket__inner__container__left__item__name__mobile product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>" >
+															<span class="basket__inner__container__left__item__name__mobile product-name" data-title="<?php esc_attr_e('Product', 'woocommerce'); ?>">
 																<?php
 																if (!$product_permalink) {
 																	echo wp_kses_post(apply_filters('woocommerce_cart_item_name ', $_product->get_name(), $cart_item, $cart_item_key) . '&nbsp;');
@@ -201,7 +201,7 @@ defined('ABSPATH') || exit;
 
 														<div class="basket__inner__container__left__item__counter basket__inner__container__left__item__counter__mobile">
 															<div class="basket__inner__container__left__item__counter__digit product-quantity" data-counterCurrent>
-															
+
 															</div>
 														</div>
 														<div class="basket__inner__container__left__item__mobilebottom__check">
@@ -225,14 +225,16 @@ defined('ABSPATH') || exit;
 									} ?>
 									<div class="update__cart__button">
 										<button type="submit" class="button<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>" name="update_cart" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Update cart', 'woocommerce'); ?></button>
-										<?php do_action( 'woocommerce_cart_actions' ); ?>
+										<?php do_action('woocommerce_cart_actions'); ?>
 										<?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
 									</div>
 
 									<?php do_action('woocommerce_after_cart_table'); ?>
 
 								</div>
-								<button class="basket__inner__container__right__result__checkout__mobile">К оформлению <span class="basket__inner__container__right__result__allprice basket__inner__container__right__result__allprice__mobile" data-result="result"><?php woocommerce_cart_totals(); ?></span></button>
+								<!-- <a href=""> -->
+									<button class="basket__inner__container__right__result__checkout__mobile" data-check>К оформлению <span class="basket__inner__container__right__result__allprice basket__inner__container__right__result__allprice__mobile" data-result="result"><?php woocommerce_cart_totals(); ?></span></button>
+								<!-- </a> -->
 
 							</div>
 

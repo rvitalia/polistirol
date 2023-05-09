@@ -284,7 +284,7 @@ function cart_update_qty_script()
 	endif;
 }
 
-add_filter( 'woocommerce_cart_needs_payment', '__return_false' );
+add_filter('woocommerce_cart_needs_payment', '__return_false');
 
 add_action('wp_footer', function () {
 
@@ -325,7 +325,7 @@ add_action('wp_footer', function () {
 		splitTitle();
 
 		function replaceCounter() {
-			if (window.innerWidth < 1000) {
+			if (window.innerWidth <= 1000) {
 				let counters = document.querySelectorAll('[data-counter="replace"]');
 
 				counters.forEach(element => {
@@ -359,23 +359,44 @@ add_action('wp_footer', function () {
 		}
 		changeNameButton();
 
-		function cancelDisabled(){
+		function cancelDisabled() {
 			let button = document.querySelector('[name="update_cart"]');
 			let minuses = document.querySelectorAll('[data-operation="minus"]');
 			let pluses = document.querySelectorAll('[data-operation="plus"]');
 
 			minuses.forEach(element => {
-				element.addEventListener('click', ()=>{
+				element.addEventListener('click', () => {
 					button.removeAttribute('disabled');
+					setTimeout(function() {
+						button.click();
+					}, 100)
+
 				})
 			});
 			pluses.forEach(element => {
-				element.addEventListener('click', ()=>{
+				element.addEventListener('click', () => {
 					button.removeAttribute('disabled');
+					setTimeout(function() {
+						button.click();
+					}, 100)
+
 				})
 			});
 		}
 		cancelDisabled();
+
+		function mobileOrderTap(){
+			if(window.innerWidth <= 1000 ){
+				let button = document.querySelector('[data-check]');
+				button.addEventListener('click', (event)=>{
+					event.preventDefault();
+					let hrefCheckout = document.querySelectorAll('[data-hrefcheckout]');
+					hrefCheckout[1].click();
+					console.log(hrefCheckout);
+				})
+			}
+		}
+		mobileOrderTap();
 
 		jQuery(document.body).on('updated_cart_totals', function() {
 			splitTitle();
