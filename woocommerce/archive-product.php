@@ -326,7 +326,6 @@ if (woocommerce_product_loop()) {
 							<li class="calback__inner__part__bottom__info__title">Телефон</li>
 							<li class="calback__inner__part__bottom__info__text"><a href="tel:<?php the_field('imageleft_calback1', 7) ?>"><?php the_field('tel_site', 7) ?></a>
 								<a href="tel:<?php the_field('tel_callback2', 7) ?>"><?php the_field('tel_callback2', 7) ?></a>
-								+ 7 (953)-230-81-86
 							</li>
 							<li class="calback__inner__part__bottom__info__title">ИНН/КПП</li>
 							<li class="calback__inner__part__bottom__info__text"><?php the_field('INN/KPP', 7) ?></li>

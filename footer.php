@@ -1,5 +1,5 @@
 <footer class="footer">
-        <div class="container container-main">
+        <div class="container container-main container-footer">
             <div class="footer__inner">
     
                 <div class="footer__inner__column__logo__mobile" style="background-image: url(<?php the_field('logo_site',  'option') ?>);">

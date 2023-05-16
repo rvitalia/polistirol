@@ -32,7 +32,7 @@ global $product;
 
 			<div class="productinfo__wrapper">
 				<button class="productinfo__inner__back" onclick="history.back();">
-					<img src="<?php bloginfo('template_directory'); ?> /assets/images/products/Arrow 3.svg" alt="arrow">Назад
+					<img src="<?php bloginfo('template_directory'); ?>/assets/images/products/Arrow 3.svg" alt="arrow">Назад
 				</button>
 				<div class="productinfo__inner">
 					<div class="productinfo__inner__left">
