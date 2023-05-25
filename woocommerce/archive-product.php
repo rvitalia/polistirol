@@ -49,9 +49,9 @@ get_header('');
 		<div class="container container-main">
 			<div class="hero__inner">
 				<div class="hero__inner__left">
-					<h1 class="hero__inner__left__title"><?php the_field('Hero_title', 7); ?></h1>
+					<h1 class="hero__inner__left__title"  data-trigger><?php the_field('Hero_title', 7); ?></h1>
 					<img class="hero__inner__img__mobile" src="<?php the_field('hero_img', 7); ?>" alt="Полистирол">
-					<span class="hero__inner__left__text"><?php the_field('hero_text', 7); ?></span>
+					<span class="hero__inner__left__text" ><?php the_field('hero_text', 7); ?></span>
 					<div class="hero__inner__left__buttons">
 						<button class="hero__inner__left__buttons__button hero__inner__left__buttons__button__accent" data-modal>Связаться
 							с нами</button>
@@ -67,7 +67,7 @@ get_header('');
 		</div>
 	</section>
 
-	<section class="adventages" id="adventages">
+	<section class="adventages" id="adventages" >
 		<div class="container container-main">
 			<div class="adventages__inner">
 				<h1 class="adventages__inner__title">Достоинства блока</h1>
@@ -148,7 +148,7 @@ if (woocommerce_product_loop()) {
 		</div>
 	</section>
 
-	<section class="testing" id="testing" style="background-image: url(<?php the_field('testing__background', 7); ?>);" data-trigger>
+	<section class="testing" id="testing" style="background-image: url(<?php the_field('testing__background', 7); ?>);">
 		<div class="container container-main">
 			<div class="testing__inner">
 				<h1 class="testing__inner__title">Документы и испытания</h1>

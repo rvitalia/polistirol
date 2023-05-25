@@ -2411,7 +2411,7 @@ body {
   font-weight: 700;
   font-size: 52px;
   line-height: 63px;
-  margin-top: 13.9rem;
+  margin-top: 7rem;
   color: #000000;
 }
 
@@ -2424,7 +2424,7 @@ body {
 @media (max-width: 1440px) {
   .hero__inner__left__title {
     font-size: 3.9rem;
-    margin-top: 10rem;
+    margin-top: 7rem;
   }
 }
 
@@ -2472,7 +2472,7 @@ body {
   font-size: 26px;
   line-height: 31px;
   letter-spacing: -0.04em;
-  margin-top: 4.9rem;
+  margin-top: 2.9rem;
   color: rgba(0, 0, 0, 0.9);
 }
 
@@ -2514,7 +2514,7 @@ body {
 }
 
 .hero__inner__left__buttons {
-  margin-top: 11rem;
+  margin-top: 3rem;
   margin-bottom: 4.9rem;
 }
 
@@ -2615,7 +2615,7 @@ body {
 
 .hero__inner__right__img {
   width: 851.97px;
-  height: 80rem;
+  height: 60rem;
   position: relative;
   z-index: -1;
   margin: -5rem -1rem -1rem -14rem;
@@ -2626,7 +2626,7 @@ body {
 
 @media (max-width: 1150px) {
   .hero__inner__right__img {
-    height: 70rem;
+    height: 56rem;
     margin-top: -2rem;
   }
 }
@@ -5478,7 +5478,7 @@ footer {
 }
 
 .mejs-inner>.mejs-controls {
-  display: none;
+  visibility: hidden;
 }
 
 .testing__inner__tests {
@@ -6831,7 +6831,7 @@ input[type="number"]:focus {
 
 .cart-empty {
   font-size: 3rem;
-  padding: 1em 2em 1em 0 !important;
+  padding: 1em 2em 1em 1.5em !important;
 }
 
 @media (max-width: 530px) {
@@ -6935,4 +6935,8 @@ input[type="number"]:focus {
 
 .woocommerce-billing-fields__field-wrapper>p{
   padding: 2rem 5px 5px 5px !important;
+}
+
+.mejs-overlay-button{
+  pointer-events: none;
 }
