@@ -91,7 +91,7 @@
                         <div class="header__inner__widgets__item">
 
                             <!-- <div class="header__inner__widgets__search"> -->
-                                <?php echo do_shortcode('[ivory-search id="266" title="Custom Search Form"]'); ?>
+                                <!-- <?php echo do_shortcode('[ivory-search id="266" title="Custom Search Form"]'); ?> -->
                             <!-- </div> -->
                             <!-- <svg class="header__inner__widgets__searchicon" id="header__search">
                                 <use xlink:href="#search"></use>
@@ -128,11 +128,11 @@
                         </nav>
 
                         <div class="header__inner__nav__burger__widgets">
-                            <a href="">
+                            <!-- <a href="">
                                 <svg class="header__inner__widgets__burger" data-search="icon">
                                     <use xlink:href="#search"></use>
                                 </svg>
-                            </a>
+                            </a> -->
                             <a href="<?php echo get_page_link(260); ?>">
                                 <svg class="header__inner__widgets__burger">
                                     <use xlink:href="#favorites"></use>
@@ -146,7 +146,7 @@
                             </a>
                         </div>
                         <div class="header__inner__burger__widgets__searchblok" data-search="input">
-                            <?php echo do_shortcode('[ivory-search id="266" title="Custom Search Form"]'); ?>
+                            <!-- <?php echo do_shortcode('[ivory-search id="266" title="Custom Search Form"]'); ?> -->
                         </div>
                     </div>
                 </div>

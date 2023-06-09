@@ -82,7 +82,7 @@ wp_enqueue_script('tinvwl');
 													'get_name'
 												)) ? $product->get_name() : $product->get_title(), $wl_product, $product) . '&nbsp;'; // WPCS: xss ok.
 											} else {
-												echo apply_filters('tinvwl_wishlist_item_name', sprintf('<a href="%s">%s</a>', esc_url($product_url), is_callable(array(
+												echo apply_filters('tinvwl_wishlist_item_name', sprintf('<a class="favourites__plugin__item_title__link" href="%s">%s</a>', esc_url($product_url), is_callable(array(
 													$product,
 													'get_name'
 												)) ? $product->get_name() : $product->get_title()), $wl_product, $product); // WPCS: xss ok.

@@ -36,14 +36,14 @@ $label = !empty($args['product_name']) ? sprintf(esc_html__('%s quantity', 'wooc
 
 	<!-- Вывести выбранные параметры вариативного товара -->
 
-	<?php 
+	<!-- <?php 
 	if (is_product()):
 		 echo '<div class="productinfo__inner__right__parametrs">
 		<div class="productinfo__inner__right__parametrs__height"><b>Высота</b><label class="productinfo__inner__right__parametrs__input" id="height"></label></div>
 		<div class="productinfo__inner__right__parametrs__width"><b>Ширина</b><label class="productinfo__inner__right__parametrs__input" id="width"></label></div>
 		<div class="productinfo__inner__right__parametrs__depth"><b>Глубина</b><label class="productinfo__inner__right__parametrs__input" id="depth"></label></div>
 		</div>'; endif;
-	?>
+	?> -->
 	
 
 	<label class="screen-reader-text" for="<?php echo esc_attr($input_id); ?>"><?php echo esc_attr($label); ?></label>

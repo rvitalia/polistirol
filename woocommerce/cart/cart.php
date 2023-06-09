@@ -26,6 +26,9 @@ defined('ABSPATH') || exit;
 	<section class="basket">
 		<div class="container container-basket">
 			<div class="basket__wrapper">
+
+			<?php do_action('woocommerce_before_cart'); ?>
+
 				<button class="productinfo__inner__back" onclick="history.back();">
 					<img src="<?php bloginfo('template_directory'); ?>/assets/images/products/Arrow 3.svg" alt="arrow">Назад
 				</button>
@@ -33,8 +36,6 @@ defined('ABSPATH') || exit;
 
 					<div class="basket__inner">
 						<h2 class="basket__inner__title">Корзина</h2>
-
-						<?php do_action('woocommerce_before_cart'); ?>
 						<div class="basket__inner__container">
 							<div class="basket__inner__container__left">
 								<div class="basket__inner__container__left__items shop_table shop_table_responsive cart woocommerce-cart-form__contents">

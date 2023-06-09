@@ -121,7 +121,7 @@ global $product;
 
 						<!-- Конец выбора  -->
 
-
+								
 
 						<!-- Вывести выбранные параметры вариативного товара -->
 						<!-- Выбор вариативного товара -->
@@ -129,7 +129,6 @@ global $product;
 						<!-- Добавление в корзину -->
 
 						<?php woocommerce_template_single_add_to_cart(); ?>
-
 						<h5 class="productinfo__inner__left__title">Дополнительная информация</h5>
 						<?php
 						if ($product->get_attributes()) {

@@ -1988,6 +1988,41 @@ swiper-container .swiper-notification {
   font-display: swap;
   font-style: normal;
 }
+@font-face {
+    font-family: "YandexSansDisplay";
+    src: url("../fonts/../fonts/YandexSansDisplay-Bold.woff") format("woff");
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "YandexSansDisplay";
+    src: url("../fonts/../fonts/YandexSansDisplay-Regular.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "YandexSansText";
+    src: url("../fonts/../fonts/YandexSansText-Bold.woff") format("woff");
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "YandexSansText";
+    src: url("../fonts/../fonts/YandexSansText-Medium.woff") format("woff");
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "YandexSansText";
+    src: url("../fonts/../fonts/YandexSansText-Regular.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
 
 *,
 *::before,

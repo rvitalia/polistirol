@@ -33,10 +33,10 @@ if (empty($product) || !$product->is_visible()) {
 			<!-- <use xlink:href="#favorites"></use> -->
 			<?php echo do_shortcode("[ti_wishlists_addtowishlist loop=yes]"); ?>
 		</div>
-		<a href="<?php echo $product->get_permalink(); ?>">
+		<a class="swiper__catalog__link" href="<?php echo $product->get_permalink(); ?>">
 			<div class="swiper__slide__inner__image"><?php echo $product->get_image(); ?></div>
 		</a>
-		<a href="<?php echo $product->get_permalink(); ?>">
+		<a class="swiper__catalog__link__title" href="<?php echo $product->get_permalink(); ?>">
 			<h5 class="swiper__slide__inner__title"> <?php echo $product->get_title(); ?></h5>
 		</a>
 		<span class="swiper__slide__inner__price"><?php echo $product->get_price_html(); ?></span>
@@ -52,9 +52,10 @@ if (empty($product) || !$product->is_visible()) {
 		<!-- Конец вывода атрибутов под карточкой каталога -->
 
 
-		<a href="<?php echo $product->add_to_cart_url() ?>" class="swiper__slide__inner__addbasket" type="button"><?php echo $product->add_to_cart_text() ?></a>
+		<!-- <a href="<?php echo $product->add_to_cart_url() ?>" class="swiper__slide__inner__addbasket"><?php echo $product->add_to_cart_text() ?></a> -->
+		<div class="add__to__cart__catalog"><?php do_action( 'woocommerce_after_shop_loop_item' ); ?></div>
+
 	</div>
 </div>
-
 
 <!-- <img class="swiper__slide__inner__image" src="" alt="block"> -->

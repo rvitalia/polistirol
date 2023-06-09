@@ -79,17 +79,20 @@ add_action('wp_enqueue_scripts', function () {
 	wp_enqueue_style('style-name', get_template_directory_uri() . '/assets/css/style.min.css');
 
 
-	if (is_shop()) :
+	if (is_shop()) {
 		wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.min.js', array(), '1.0.0', true);
-	endif;
-
-	if (is_product()) :
+	} elseif (is_product()) {
 		wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/main.min.js', array(), '1.0.0', true);
-	endif;
-	if (is_cart()) :
-		wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/basket.min.js', array(), '1.0.0', true);
-	endif;
+	} elseif (is_cart()) {
+		wp_enqueue_script('basket', get_template_directory_uri() . '/assets/js/basket.min.js', array(), '1.0.0', true);
+	} elseif (is_checkout()) {
+		wp_enqueue_script('favourites', get_template_directory_uri() . '/assets/js/favourites.min.js', array(), '1.0.0', true);
+	} else {
+		wp_enqueue_script('favourites', get_template_directory_uri() . '/assets/js/favourites.min.js', array(), '1.0.0', true);
+	}
 });
+
+
 
 
 wp_deregister_style('woocommerce-general');
@@ -361,42 +364,54 @@ add_action('wp_footer', function () {
 
 		function cancelDisabled() {
 			let button = document.querySelector('[name="update_cart"]');
-			let minuses = document.querySelectorAll('[data-operation="minus"]');
-			let pluses = document.querySelectorAll('[data-operation="plus"]');
 
-			minuses.forEach(element => {
-				element.addEventListener('click', () => {
-					button.removeAttribute('disabled');
-					setTimeout(function() {
-						button.click();
-					}, 100)
+			if (button != undefined) {
+				let minuses = document.querySelectorAll('[data-operation="minus"]');
+				let pluses = document.querySelectorAll('[data-operation="plus"]');
 
-				})
-			});
-			pluses.forEach(element => {
-				element.addEventListener('click', () => {
-					button.removeAttribute('disabled');
-					setTimeout(function() {
-						button.click();
-					}, 100)
+				minuses.forEach(element => {
+					element.addEventListener('click', () => {
+						button.removeAttribute('disabled');
+						setTimeout(function() {
+							button.click();
+						}, 100)
 
-				})
-			});
+					})
+				});
+				pluses.forEach(element => {
+					element.addEventListener('click', () => {
+						button.removeAttribute('disabled');
+						setTimeout(function() {
+							button.click();
+						}, 100)
+
+					})
+				});
+			}
+
 		}
 		cancelDisabled();
 
-		function mobileOrderTap(){
-			if(window.innerWidth <= 1000 ){
+		function mobileOrderTap() {
+			if (window.innerWidth <= 1000) {
+
+				//для версии без правой части переход на страницу заказа(....)
 				let button = document.querySelector('[data-check]');
-				button.addEventListener('click', (event)=>{
-					event.preventDefault();
-					let hrefCheckout = document.querySelectorAll('[data-hrefcheckout]');
-					hrefCheckout[1].click();
-					console.log(hrefCheckout);
-				})
+				if (button != undefined) {
+					button.addEventListener('click', (event) => {
+						event.preventDefault();
+						let hrefCheckout = document.querySelectorAll('[data-hrefcheckout]');
+						hrefCheckout[1].click();
+						let buttonResult = button.querySelectorAll('[data-result="result"]');
+						buttonResult[1].classList.add('activecolor');
+					})
+				}
 			}
 		}
 		mobileOrderTap();
+
+
+
 
 		jQuery(document.body).on('updated_cart_totals', function() {
 			splitTitle();
